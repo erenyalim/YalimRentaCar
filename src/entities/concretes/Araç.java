@@ -97,8 +97,4 @@ public class Araç {
 	public long toplamfiyatHesapla(long günSayisi) {
 		return price*günSayisi;
 	}
-	
-	
-	
-	
 }

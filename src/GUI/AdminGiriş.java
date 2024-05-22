@@ -19,7 +19,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import entities.concretes.Admin;
 
 public class AdminGiriş extends JFrame {
 
@@ -190,5 +189,4 @@ public class AdminGiriş extends JFrame {
 				
 				setVisible(true);
 	}
-
 }

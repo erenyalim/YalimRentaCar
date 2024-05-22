@@ -20,6 +20,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import javax.swing.JFormattedTextField;
+import javax.swing.JPasswordField;
 
 public class AdminEkrani extends JFrame {
 
@@ -33,13 +35,13 @@ public class AdminEkrani extends JFrame {
 	private JButton btnAracEkle;
 	private JLabel lblAdminEkle;
 	private JTextField txtKullancAd;
-	private JTextField txtparola;
 	private JButton btnAdminEkle;
 	private JTextField txtPlaka;
 	private JLabel araçekle;
 	private JButton btncik;
 	private JComboBox boxyakittürü;
 	private JLabel lblVites;
+	private JPasswordField passwordField;
 
 	public AdminEkrani() {
 
@@ -50,6 +52,7 @@ public class AdminEkrani extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1280, 720);
 		contentPane = new JPanel();
+		contentPane.setName("Parola");
 		contentPane.setForeground(Color.DARK_GRAY);
 		contentPane.setBackground(Color.DARK_GRAY);
 		setContentPane(contentPane);
@@ -187,6 +190,7 @@ public class AdminEkrani extends JFrame {
 							JOptionPane.showMessageDialog(AdminEkrani.this, "Yeni araç eklendi.");
 							dispose();
 							AdminEkrani adminEkrani = new AdminEkrani();
+							setVisible(false);
 						}
 						else {
 							JOptionPane.showMessageDialog(AdminEkrani.this, "Lütfen gerekli alanları doldurun.");
@@ -227,14 +231,11 @@ public class AdminEkrani extends JFrame {
 		txtKullancAd.setColumns(10);
 		txtKullancAd.setBounds(416, 90, 190, 21);
 		contentPane.add(txtKullancAd);
-
-		txtparola = new JTextField();
-		txtparola.setText("Şifre");
-		txtparola.setForeground(Color.LIGHT_GRAY);
-		txtparola.setFont(new Font("Yu Gothic Medium", Font.BOLD | Font.ITALIC, 12));
-		txtparola.setColumns(10);
-		txtparola.setBounds(416, 122, 190, 21);
-		contentPane.add(txtparola);
+		
+		passwordField = new JPasswordField();
+		passwordField.setName("Parola");
+		passwordField.setBounds(416, 120, 190, 19);
+		contentPane.add(passwordField);
 
 		btnAdminEkle = new JButton("Admin Ekle");
 
@@ -282,8 +283,8 @@ public class AdminEkrani extends JFrame {
 					FileWriter fWriter = null;
 					try {
 						tempId++;
-						String temp = tempId + "," + txtKullancAd.getText().trim() + "," + txtparola.getText().trim()
-								+ "," + "\r\n";
+						String temp = tempId + "," + txtKullancAd.getText().trim() + "," + new String(passwordField.getPassword()) + "," + "\r\n";
+						java.util.Arrays.fill(passwordField.getPassword(), '0');//password field temizleme
 						fWriter = new FileWriter("admin.txt", true);
 						fWriter.write(temp);
 						JOptionPane.showMessageDialog(AdminEkrani.this, "Yeni admin eklendi.");
@@ -325,6 +326,7 @@ public class AdminEkrani extends JFrame {
 		lblVites.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
 		lblVites.setBounds(80, 267, 65, 14);
 		contentPane.add(lblVites);
+		
 
 		setVisible(true);
 	}

@@ -223,7 +223,9 @@ public class ÜyeOl extends JFrame {
 		contentPane.add(txtAd);
 
 		// T.C Kimlik Numarası
+		
 		txtTcKimlikNo = new JTextField();
+	
 		txtTcKimlikNo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

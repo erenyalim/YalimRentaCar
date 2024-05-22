@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Toolkit;
@@ -75,7 +76,7 @@ public class AraçSeçim extends JFrame {
 		contentPane.add(lblTeklifler);
 		 
 		
-		String[] araçtabloisimler = {"Marka", "Model", "Gövde Tipi", "Yakıt Türü", "Vites", "Günlük Fiyat", "Plaka", "Toplam Fiyat"};
+		String[] araçtabloisimler = {"Marka", "Model", "Gövde Tipi", "Yakıt Türü", "Vites", "Günlük Fiyat", "Plaka", "Toplam Fiyat" , ""};
 		Araçtablo = new DefaultTableModel(araçtabloisimler,0); // sütün,satır
 
         JTable table = new JTable(Araçtablo);
@@ -96,7 +97,7 @@ public class AraçSeçim extends JFrame {
         List<Araç> araçListesi = araçlartxtOku();
         for (Araç arac : araçListesi) {
             long toplamFiyat = arac.getPrice() * gunSayisi;
-            Araçtablo.addRow(new Object[]{arac.getMarka(), arac.getModel(), arac.getgövdetipi(), arac.getYakitTürü(), arac.getVites(), arac.getPrice() + "TL", arac.getPlaka(), arac.toplamfiyatHesapla(günSayisi)+"TL"});
+            Araçtablo.addRow(new Object[]{arac.getMarka(), arac.getModel(), arac.getgövdetipi(), arac.getYakitTürü(), arac.getVites(), arac.getPrice() + "TL", arac.getPlaka(), arac.toplamfiyatHesapla(günSayisi)+"TL"  });
         }
 
      
@@ -128,4 +129,5 @@ public class AraçSeçim extends JFrame {
     public String gethoşgeldinkullanici() {
 		return hoşgeldinkullanici;
 	}
+        
 } 

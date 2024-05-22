@@ -5,6 +5,9 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -13,15 +16,15 @@ import javax.swing.*;
 import com.toedter.calendar.JDateChooser;
 
 public class KiralamaEkranı extends JFrame {
-	 
+
 	private JPanel contentPane;
 	private JButton teklifleriGöster;
 	private JLabel line;
 	private JButton btncik;
 	private JLabel labelalis;
 	private JLabel labeldönüs;
-	private JComboBox<String> comboAlis;
-	private JComboBox<String> comboDönüs;
+	private JComboBox comboAlis;
+	private JComboBox comboDönüs;
 	private JLabel alistarihi;
 	private JLabel donustarihi;
 	private JDateChooser dateChooserAlis;
@@ -32,7 +35,7 @@ public class KiralamaEkranı extends JFrame {
 
 	public KiralamaEkranı(String hoşgeldinkullanici) {
 		this.hoşgeldinkullanici = hoşgeldinkullanici;
-		
+
 		// Frame
 		setResizable(false);
 		setTitle("Yalım Rent a Car");
@@ -58,16 +61,24 @@ public class KiralamaEkranı extends JFrame {
 		teklifleriGöster.setBackground(Color.ORANGE);
 		teklifleriGöster.setBounds(836, 275, 209, 49);
 		contentPane.add(teklifleriGöster);
-		
+
 		teklifleriGöster.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == teklifleriGöster) { // getsource hangi nesneden geldiğini belirler. burda e actionı btncik dan mı geldiğini kontrol ediyor.
-					LocalDate alisTarihi = dateChooserAlis.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			        LocalDate donusTarihi = dateChooserDonüs.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			        long gunSayisi = ChronoUnit.DAYS.between(alisTarihi, donusTarihi);
-			        AraçSeçim araçSeçim = new AraçSeçim(gunSayisi, gethoşgeldinkullanici());
-					setVisible(false);
+
+				if (comboAlis.getSelectedItem() != null && comboDönüs.getSelectedItem() != null) {
+					if (e.getSource() == teklifleriGöster) { // getsource hangi nesneden geldiğini belirler. burda e
+																// actionı btncik dan mı geldiğini kontrol ediyor.
+						LocalDate alisTarihi = dateChooserAlis.getDate().toInstant().atZone(ZoneId.systemDefault())
+								.toLocalDate();
+						LocalDate donusTarihi = dateChooserDonüs.getDate().toInstant().atZone(ZoneId.systemDefault())
+								.toLocalDate();
+						long gunSayisi = ChronoUnit.DAYS.between(alisTarihi, donusTarihi);
+						AraçSeçim araçSeçim = new AraçSeçim(gunSayisi, gethoşgeldinkullanici());
+						setVisible(false);
+					}
+				} else {
+					JOptionPane.showMessageDialog(KiralamaEkranı.this, "Lütfen gerekli alanları doldurun.");
 				}
 			}
 		});
@@ -82,7 +93,8 @@ public class KiralamaEkranı extends JFrame {
 		btncik.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == btncik) { // getsource hangi nesneden geldiğini belirler. burda e actionı btncik  dan mı geldiğini kontrol ediyor.
+				if (e.getSource() == btncik) { // getsource hangi nesneden geldiğini belirler. burda e actionı btncik
+												// dan mı geldiğini kontrol ediyor.
 					GirisEkrani girisEkrani = new GirisEkrani();
 					setVisible(false);
 				}
@@ -103,16 +115,18 @@ public class KiralamaEkranı extends JFrame {
 		labeldönüs.setBounds(367, 159, 82, 21);
 		contentPane.add(labeldönüs);
 
-		String[] strAlis = { "İstanbul Beylikdüzü", "İstanbul Sarıyer", "İstanbul Kadıköy", "İstanbul Florya", "İstanbul Beşiktaş" };
-		comboAlis = new JComboBox<>(strAlis);
+		String[] strAlis = { "İstanbul Beylikdüzü", "İstanbul Sarıyer", "İstanbul Kadıköy", "İstanbul Florya",
+				"İstanbul Beşiktaş" };
+		comboAlis = new JComboBox(strAlis);
 		comboAlis.setBackground(Color.WHITE);
 		comboAlis.setSelectedIndex(-1);
 		comboAlis.setForeground(Color.BLACK);
 		comboAlis.setBounds(135, 191, 209, 40);
 		contentPane.add(comboAlis);
 
-		String[] strDönüs = { "İstanbul Beylikdüzü", "İstanbul Sarıyer", "İstanbul Kadıköy", "İstanbul Florya", "İstanbul Beşiktaş" };
-		comboDönüs = new JComboBox<>(strDönüs);
+		String[] strDönüs = { "İstanbul Beylikdüzü", "İstanbul Sarıyer", "İstanbul Kadıköy", "İstanbul Florya",
+				"İstanbul Beşiktaş" };
+		comboDönüs = new JComboBox(strDönüs);
 		comboDönüs.setBackground(Color.WHITE);
 		comboDönüs.setSelectedIndex(-1);
 		comboDönüs.setBounds(367, 191, 209, 40);
@@ -120,13 +134,14 @@ public class KiralamaEkranı extends JFrame {
 
 		// Date Chooser
 		dateChooserAlis = new JDateChooser();
-		dateChooserAlis.setDateFormatString("dd mm yyyy");
+		dateChooserAlis.setDateFormatString("dd MMM yyyy");
 		dateChooserAlis.getCalendarButton().setBackground(Color.ORANGE);
 		dateChooserAlis.setBackground(Color.DARK_GRAY);
 		dateChooserAlis.setBounds(602, 191, 209, 40);
 		contentPane.add(dateChooserAlis);
 
 		dateChooserDonüs = new JDateChooser();
+		dateChooserAlis.setDateFormatString("dd MMM yyyy");
 		dateChooserDonüs.setBackground(Color.DARK_GRAY);
 		dateChooserDonüs.getCalendarButton().setBackground(Color.ORANGE);
 		dateChooserDonüs.setBounds(836, 191, 209, 40);
@@ -139,7 +154,7 @@ public class KiralamaEkranı extends JFrame {
 		alistarihi.setAlignmentX(0.5f);
 		alistarihi.setBounds(602, 159, 82, 21);
 		contentPane.add(alistarihi);
-		
+
 		donustarihi = new JLabel("Dönüş Tarihi : ");
 		donustarihi.setForeground(Color.ORANGE);
 		donustarihi.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
@@ -161,17 +176,10 @@ public class KiralamaEkranı extends JFrame {
 		lblYalmRentA.setBounds(135, 127, 249, 21);
 		contentPane.add(lblYalmRentA);
 
-		JButton btnKiralkAralarm = new JButton("Kiralık Araçlarım");
-		btnKiralkAralarm.setForeground(Color.BLACK);
-		btnKiralkAralarm.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
-		btnKiralkAralarm.setBackground(Color.ORANGE);
-		btnKiralkAralarm.setBounds(135, 406, 209, 49);
-		contentPane.add(btnKiralkAralarm);
-
 		setVisible(true);
 	}
-	
-    public String gethoşgeldinkullanici() {
+
+	public String gethoşgeldinkullanici() {
 		return hoşgeldinkullanici;
 	}
 }
