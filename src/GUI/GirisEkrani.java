@@ -197,7 +197,7 @@ public class GirisEkrani extends JFrame {
 		
 		// Araba resim
 		arabalarLabel = new JLabel("");
-		arabalarLabel.setIcon(new ImageIcon("girişekraniaraba.png"));
+		arabalarLabel.setIcon(new ImageIcon("girisekranıaraba.png"));
 		arabalarLabel.setForeground(Color.DARK_GRAY);
 		arabalarLabel.setBounds(373, 104, 830, 450);
 		contentPane.add(arabalarLabel);
@@ -220,3 +220,4 @@ public class GirisEkrani extends JFrame {
 	
 	}
 }
+

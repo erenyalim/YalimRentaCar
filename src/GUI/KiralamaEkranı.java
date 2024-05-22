@@ -1,67 +1,38 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.Container;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.PublicKey;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import javax.swing.*;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
-import javax.swing.JToggleButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JEditorPane;
-import javax.swing.JSlider;
-import javax.swing.JSeparator;
-import javax.management.loading.PrivateClassLoader;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import com.toedter.calendar.JDateChooser;
-import com.toedter.components.JSpinField;
-import com.toedter.calendar.JCalendar;
-import com.toedter.calendar.JDayChooser;
-import com.toedter.components.JLocaleChooser;
 
 public class KiralamaEkranı extends JFrame {
 	 
-	public long hesaplaGunSayisi() {
-        LocalDate alisTarihi = dateChooserAlis.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate donusTarihi = dateChooserDonüs.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        return ChronoUnit.DAYS.between(alisTarihi, donusTarihi);
-    }
-	
 	private JPanel contentPane;
 	private JButton teklifleriGöster;
 	private JLabel line;
-	private JButton btnkYap;
 	private JButton btncik;
 	private JLabel labelalis;
 	private JLabel labeldönüs;
-	private JComboBox comboAlis;
-	private JComboBox comboDönüs;
+	private JComboBox<String> comboAlis;
+	private JComboBox<String> comboDönüs;
 	private JLabel alistarihi;
 	private JLabel donustarihi;
 	private JDateChooser dateChooserAlis;
 	private JDateChooser dateChooserDonüs;
 	private JLabel lblHosgeldin;
 	private JLabel lblYalmRentA;
+	private String hoşgeldinkullanici;
 
-	public KiralamaEkranı() {
+	public KiralamaEkranı(String hoşgeldinkullanici) {
+		this.hoşgeldinkullanici = hoşgeldinkullanici;
 		
-		
-
 		// Frame
 		setResizable(false);
 		setTitle("Yalım Rent a Car");
@@ -89,20 +60,15 @@ public class KiralamaEkranı extends JFrame {
 		contentPane.add(teklifleriGöster);
 		
 		teklifleriGöster.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				if (e.getSource() == teklifleriGöster) { // getsource hangi nesneden geldiğini belirler. burda e actionı btncik dan mı geldiğini kontrol ediyor.
-					
 					LocalDate alisTarihi = dateChooserAlis.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			        LocalDate donusTarihi = dateChooserDonüs.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			        long gunSayisi = ChronoUnit.DAYS.between(alisTarihi, donusTarihi);
-					
-			        AraçSeçim araçSeçim = new AraçSeçim();
+			        AraçSeçim araçSeçim = new AraçSeçim(gunSayisi, gethoşgeldinkullanici());
 					setVisible(false);
 				}
-
 			}
 		});
 
@@ -114,17 +80,15 @@ public class KiralamaEkranı extends JFrame {
 		contentPane.add(btncik);
 
 		btncik.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				if (e.getSource() == btncik) { // getsource hangi nesneden geldiğini belirler. burda e actionı btncik  dan mı geldiğini kontrol ediyor.
 					GirisEkrani girisEkrani = new GirisEkrani();
 					setVisible(false);
 				}
-
 			}
 		});
+
 		labelalis = new JLabel("Alış Yeri : ");
 		labelalis.setForeground(Color.ORANGE);
 		labelalis.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
@@ -139,24 +103,22 @@ public class KiralamaEkranı extends JFrame {
 		labeldönüs.setBounds(367, 159, 82, 21);
 		contentPane.add(labeldönüs);
 
-		String[] strAlis = { "İstanbul Beylikdüzü", "İstanbul Sarıyer", "İstanbul Kadıköy", "İstanbul Florya","İstanbul Beşiktaş" };
-		comboAlis = new JComboBox(strAlis);
+		String[] strAlis = { "İstanbul Beylikdüzü", "İstanbul Sarıyer", "İstanbul Kadıköy", "İstanbul Florya", "İstanbul Beşiktaş" };
+		comboAlis = new JComboBox<>(strAlis);
 		comboAlis.setBackground(Color.WHITE);
 		comboAlis.setSelectedIndex(-1);
 		comboAlis.setForeground(Color.BLACK);
 		comboAlis.setBounds(135, 191, 209, 40);
 		contentPane.add(comboAlis);
 
-		String[] strDönüs = { "İstanbul Beylikdüzü", "İstanbul Sarıyer", "İstanbul Kadıköy", "İstanbul Florya",
-				"İstanbul Beşiktaş" };
-		comboDönüs = new JComboBox(strDönüs);
+		String[] strDönüs = { "İstanbul Beylikdüzü", "İstanbul Sarıyer", "İstanbul Kadıköy", "İstanbul Florya", "İstanbul Beşiktaş" };
+		comboDönüs = new JComboBox<>(strDönüs);
 		comboDönüs.setBackground(Color.WHITE);
 		comboDönüs.setSelectedIndex(-1);
 		comboDönüs.setBounds(367, 191, 209, 40);
 		contentPane.add(comboDönüs);
 
 		// Date Chooser
-
 		dateChooserAlis = new JDateChooser();
 		dateChooserAlis.setDateFormatString("dd mm yyyy");
 		dateChooserAlis.getCalendarButton().setBackground(Color.ORANGE);
@@ -170,8 +132,7 @@ public class KiralamaEkranı extends JFrame {
 		dateChooserDonüs.setBounds(836, 191, 209, 40);
 		contentPane.add(dateChooserDonüs);
 
-		//Labels
-		
+		// Labels
 		alistarihi = new JLabel("Alış Tarihi : ");
 		alistarihi.setForeground(Color.ORANGE);
 		alistarihi.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
@@ -185,21 +146,21 @@ public class KiralamaEkranı extends JFrame {
 		donustarihi.setAlignmentX(0.5f);
 		donustarihi.setBounds(836, 159, 82, 21);
 		contentPane.add(donustarihi);
-		
-		lblHosgeldin = new JLabel("Hoşgeldin" );
+
+		lblHosgeldin = new JLabel("Hoşgeldin, " + hoşgeldinkullanici);
 		lblHosgeldin.setForeground(Color.ORANGE);
 		lblHosgeldin.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 30));
 		lblHosgeldin.setAlignmentX(0.5f);
 		lblHosgeldin.setBounds(27, 21, 317, 40);
 		contentPane.add(lblHosgeldin);
-		
+
 		lblYalmRentA = new JLabel("Araç Kiralama - Yalım Rent a Car ");
 		lblYalmRentA.setForeground(Color.ORANGE);
 		lblYalmRentA.setFont(new Font("Cascadia Code", Font.BOLD | Font.ITALIC, 12));
 		lblYalmRentA.setAlignmentX(0.5f);
 		lblYalmRentA.setBounds(135, 127, 249, 21);
 		contentPane.add(lblYalmRentA);
-		
+
 		JButton btnKiralkAralarm = new JButton("Kiralık Araçlarım");
 		btnKiralkAralarm.setForeground(Color.BLACK);
 		btnKiralkAralarm.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
@@ -208,6 +169,9 @@ public class KiralamaEkranı extends JFrame {
 		contentPane.add(btnKiralkAralarm);
 
 		setVisible(true);
-
+	}
+	
+    public String gethoşgeldinkullanici() {
+		return hoşgeldinkullanici;
 	}
 }

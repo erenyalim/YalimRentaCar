@@ -16,10 +16,9 @@ public class Araç {
 		super();
 	}
 
-	public Araç(int id, String marka, String model, String gövdetipi, String yakitTürü, String vites, int price,
-			String plaka) {
+
+	public Araç(String marka, String model, String gövdetipi, String yakitTürü, String vites, int price, String plaka) {
 		super();
-		this.id = id;
 		this.marka = marka;
 		this.model = model;
 		this.gövdetipi = gövdetipi;
@@ -28,6 +27,7 @@ public class Araç {
 		this.price = price;
 		this.plaka = plaka;
 	}
+
 
 	public int getId() {
 		return id;
@@ -91,6 +91,11 @@ public class Araç {
 
 	public void setPlaka(String plaka) {
 		this.plaka = plaka;
+	}
+
+
+	public long toplamfiyatHesapla(long günSayisi) {
+		return price*günSayisi;
 	}
 	
 	

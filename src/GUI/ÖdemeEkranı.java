@@ -40,9 +40,10 @@ public class ÖdemeEkranı extends JFrame {
 	private JLabel labelyil;
 	private JLabel lblKartNumaras;
 	private JLabel lblCvv;
-	
+	private String hoşgeldinkullanici;
 
-	public ÖdemeEkranı() {
+	public ÖdemeEkranı(String hoşgeldinkullanici) {
+		this.hoşgeldinkullanici = hoşgeldinkullanici;
 		
 		Container cp = getContentPane();
 		
@@ -170,7 +171,7 @@ public class ÖdemeEkranı extends JFrame {
 		                try {
 		                    fr.close();
 		                    if (found) {
-		                        KiralamaEkranı kiralamaEkranı = new KiralamaEkranı();
+		                        KiralamaEkranı kiralamaEkranı = new KiralamaEkranı(hoşgeldinkullanici);
 		                        setVisible(false);
 		                    }
 		                } catch (Exception exp) {
@@ -210,5 +211,9 @@ public class ÖdemeEkranı extends JFrame {
 		contentPane.add(lblCvv);
 		
 		setVisible(true);
+	}
+	
+	public String gethoşgeldinkullanici() {
+		return hoşgeldinkullanici;
 	}
 }

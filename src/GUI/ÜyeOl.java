@@ -1,47 +1,34 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.EventQueue;
+
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.Component;
 
-import javax.management.loading.PrivateClassLoader;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JPasswordField;
-import javax.swing.JToggleButton;
+
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
-import javax.swing.JFormattedTextField;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.sql.Date;
-import java.awt.ComponentOrientation;
+
 import java.awt.Cursor;
 
 public class ÜyeOl extends JFrame {
@@ -95,102 +82,84 @@ public class ÜyeOl extends JFrame {
 
 		// Üye Ol Buton
 		btnUyeol = new JButton("Üye Ol");
-		
-		//Üye Ol Buton dosya okuma yazma / checkbox kontrolü
+
+		// Üye Ol Buton dosya okuma yazma / checkbox kontrolü
 		btnUyeol.addActionListener(new ActionListener() {
-	         @Override
-	         public void actionPerformed(ActionEvent evt) {
-	        	 BufferedReader br = null;
-	             FileReader fr = null;
-	             int tempId = 0;
-	             boolean found = false;
-	             	try {
-	            	 fr = new FileReader("müşteri.txt");
-	        		 br = new BufferedReader(fr);
-	        		 String line;
-	        		 String[] strArray;
-	        		 
-	        		 while((line = br.readLine()) != null) {
-	        				 strArray = line.split(",");
-	        				 tempId = Integer.parseInt(strArray[0]);
-	        				 if((strArray[1].equals(txtTcKimlikNo.getText().trim()))) {
-	        					 found = true;
-	        					 JOptionPane.showMessageDialog(ÜyeOl.this, "Bu kullanıcı zaten mevcut.");
-	        					 break;
-	        				 
-	        				 }
-	        				 if((strArray[5].equals(txtKullaniciadi.getText().trim()))) {
-	        					 found = true;
-	        					 JOptionPane.showMessageDialog(ÜyeOl.this, "Bu kullancı adı alınmış.");
-	        					 break;
-	        				 
-	        				 }
-	        		 }
-	        		 
-	        	} catch (IOException e) {
-	        			// TODO Auto-generated catch block
-	        		 System.out.println("Dosya okuma hatası oluştu.");
-	        	}
-	            finally {
-	            	 if(fr != null) {
-	            		 try {
-	            			 fr.close();
-	            		 }
-	            		 catch(IOException exp){
-	            			 System.out.println("Okuma işlemi başarılı ancak kapatma işlemi başarısız.");
-	            		 }
-	            	 }
-	             }
-	             if (chckbox1.isSelected() && chckbox2.isSelected()) {
-	            	 if(found == false) {
-		        		 FileWriter fWriter = null;
-			             try {
-			            	 tempId++;
-			            	 String temp = tempId + "," + txtTcKimlikNo.getText().trim() + "," + txtAd.getText().trim() + "," + txtSoyad.getText().trim() + "," + txtDogumTarihi.getText().trim() + "," + txtKullaniciadi.getText().trim() + "," + textparola.getText().trim() + "\r\n";	            	
-			            	 fWriter = new FileWriter("müşteri.txt", true);
-			            	 fWriter.write(temp);
-			            	 JOptionPane.showMessageDialog(ÜyeOl.this, "Kayıt olma başarılı.");
-			            	 dispose();
-			                
-			             	
-			                 btnUyeol.addActionListener(new ActionListener() {
-			        			public void actionPerformed(ActionEvent e) {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				BufferedReader br = null;
+				FileReader fr = null;
+				int tempId = 0;
+				boolean found = false;
+				try {
+					fr = new FileReader("müşteri.txt");
+					br = new BufferedReader(fr);
+					String line;
+					String[] strArray;
 
-			        				if (e.getSource() == btnUyeol) {
+					while ((line = br.readLine()) != null) {
+						strArray = line.split(",");
+						tempId = Integer.parseInt(strArray[0]);
+						if ((strArray[1].equals(txtTcKimlikNo.getText().trim()))) {
+							found = true;
+							JOptionPane.showMessageDialog(ÜyeOl.this, "Bu kullanıcı zaten mevcut.");
+							break;
 
-			        					KullanıcıGiriş kullanıcıGiriş = new KullanıcıGiriş();
-			        					setVisible(false);
+						}
+						if ((strArray[5].equals(txtKullaniciadi.getText().trim()))) {
+							found = true;
+							JOptionPane.showMessageDialog(ÜyeOl.this, "Bu kullancı adı alınmış.");
+							break;
 
-			        				}
-			        			}
-			        		});
-			               
-			             }
-			             catch (IOException exp) {
-			                 System.out.println("Kayıt olma işlemi başarısız.");
-			             }
-			             finally {
-			            	 if(fWriter != null) {
-			            		 try {
-			            			 fWriter.close();
-			            		 }
-			            		 catch(IOException exp){
-			            			 System.out.println("Kapatma başarısız.");
-			            		 }
-			            	 }
-			             }
-		        	 }
+						}
 					}
-	             else {
-						JOptionPane.showMessageDialog(ÜyeOl.this,"Üyelik işlemi için gerekli koşulları kabul etmeniz gerekmektedir.");
-					}
-	        
-	         }
-	      });
-		
-	
 
-		
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					System.out.println("Dosya okuma hatası oluştu.");
+				} finally {
+					if (fr != null) {
+						try {
+							fr.close();
+						} catch (IOException exp) {
+							System.out.println("Okuma işlemi başarılı ancak kapatma işlemi başarısız.");
+						}
+					}
+				}
+				if (chckbox1.isSelected() && chckbox2.isSelected()) {
+					if (found == false) {
+						FileWriter fWriter = null;
+						try {
+							tempId++;
+							String temp = tempId + "," + txtTcKimlikNo.getText().trim() + "," + txtAd.getText().trim()
+									+ "," + txtSoyad.getText().trim() + "," + txtDogumTarihi.getText().trim() + ","
+									+ txtKullaniciadi.getText().trim() + "," + textparola.getText().trim() + "\r\n";
+							fWriter = new FileWriter("müşteri.txt", true);
+							fWriter.write(temp);
+							JOptionPane.showMessageDialog(ÜyeOl.this, "Kayıt olma başarılı.");
+
+						} catch (IOException exp) {
+							System.out.println("Kayıt olma işlemi başarısız.");
+						} finally {
+							if (fWriter != null) {
+								try {
+									fWriter.close();
+									KullanıcıGiriş kullanıcıGiriş = new KullanıcıGiriş();
+			                        setVisible(false);
+								} catch (IOException exp) {
+									System.out.println("Kapatma başarısız.");
+								}
+							}
+						}
+					}
+				} else {
+					JOptionPane.showMessageDialog(ÜyeOl.this,
+							"Üyelik işlemi için gerekli koşulları kabul etmeniz gerekmektedir.");
+				}
+
+			}
+		});
+
 		btnUyeol.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
 		btnUyeol.setBackground(Color.ORANGE);
 		btnUyeol.setForeground(Color.BLACK);
@@ -215,8 +184,7 @@ public class ÜyeOl extends JFrame {
 		txtDogumTarihi.setFont(new Font("Yu Gothic Medium", Font.BOLD, 18));
 		txtDogumTarihi.setColumns(10);
 		txtDogumTarihi.setBounds(483, 246, 297, 36);
-		contentPane.add(txtDogumTarihi); 
-		
+		contentPane.add(txtDogumTarihi);
 
 		// Soyad
 		txtSoyad = new JTextField();
@@ -321,7 +289,7 @@ public class ÜyeOl extends JFrame {
 
 				if (e.getSource() == btnGeriDn) {
 
-					GirisEkrani şifermiUnuttum = new GirisEkrani();
+					GirisEkrani girisEkrani = new GirisEkrani();
 					setVisible(false);
 
 				}
