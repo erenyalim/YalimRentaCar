@@ -157,8 +157,6 @@ public class AraçSeçim extends JFrame {
         private List<Araç> araçListesi;
         private long günSayisi;
         private String hoşgeldinkullanici;
-        
-        
 
         public ButtonEditor(JButton button, List<Araç> araçListesi, long günSayisi, String hoşgeldinkullanici) {
             this.button = button;
@@ -184,6 +182,7 @@ public class AraçSeçim extends JFrame {
                 Araç selectedAraç = araçListesi.get(selectedRow);
                 SürücüDetay sürücüDetay =new SürücüDetay(günSayisi, hoşgeldinkullanici, selectedAraç);
                 setVisible(false);
+                dispose();
             }
             isPushed = false;
             return label;

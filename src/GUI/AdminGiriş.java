@@ -143,7 +143,6 @@ public class AdminGiriş extends JFrame {
 		            public void actionPerformed(ActionEvent e) {
 
 		                if(e.getSource()==btnGeriDn) {
-
 		                	GirisEkrani girisEkrani = new GirisEkrani();
 		                    setVisible(false);
 
