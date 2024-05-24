@@ -41,9 +41,13 @@ public class ÖdemeEkranı extends JFrame {
 	private JLabel lblKartNumaras;
 	private JLabel lblCvv;
 	private String hoşgeldinkullanici;
+	private long günSayisi;
+	private long toplamfiyat;
 
-	public ÖdemeEkranı(String hoşgeldinkullanici) {
+	public ÖdemeEkranı(long günSayisi, String hoşgeldinkullanici,long toplamFiyat) {
 		this.hoşgeldinkullanici = hoşgeldinkullanici;
+		this.günSayisi = günSayisi;
+		this.toplamfiyat = toplamFiyat;
 		
 		Container cp = getContentPane();
 		
@@ -106,6 +110,17 @@ public class ÖdemeEkranı extends JFrame {
 		btngeridön.setBackground(Color.ORANGE);
 		btngeridön.setBounds(759, 237, 117, 36);
 		contentPane.add(btngeridön);
+		btngeridön.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(e.getSource() == btngeridön) {
+					SürücüDetay sürücüDetay = new SürücüDetay(günSayisi, hoşgeldinkullanici);	
+					setVisible(false);
+				}
+			}
+		});
+		
 		
 		btngeridön.addMouseListener(new MouseAdapter() {
 

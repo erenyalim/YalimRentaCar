@@ -90,7 +90,7 @@ public class KullanıcıGiriş extends JFrame {
                             fr.close();
                             if (found) {
                                 KiralamaEkranı kiralamaEkranı = new KiralamaEkranı(hoşgeldinkullanici);
-                                kiralamaEkranı.setVisible(true); // Bu satırı ekliyoruz
+                                kiralamaEkranı.setVisible(true); 
                                 setVisible(false);
                             }
                         } catch (Exception exp) {

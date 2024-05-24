@@ -8,10 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
@@ -53,17 +57,19 @@ public class Hakkimizda extends JFrame {
 		txtpnHakkimizda.setFont(new Font("Tahoma", Font.ITALIC, 15));
 		txtpnHakkimizda.setEnabled(false);
 		txtpnHakkimizda.setEditable(false);
-		txtpnHakkimizda.setText("Yalım Rent a Car, müşterilerine güvenilir ve kaliteli araç kiralama hizmetleri sunan öncü bir firmadır. "
-				+ "Kurulduğumuz günden bu yana, müşteri memnuniyeti ve güvenilirlik ilkelerimizin temelinde ilerliyoruz.\r\n\r\nMisyonumuz, "
-				+ "her zaman müşterilerimize en iyi hizmeti sunmak ve seyahat deneyimlerini daha konforlu ve keyifli hale getirmektir. "
-				+ "Geniş araç filomuzla, müşterilerimizin her ihtiyacına uygun seçenekler sunuyoruz. Güvenlik ve kalite standartlarımızı "
-				+ "her zaman en üst düzeyde tutarak, müşterilerimizin seyahatlerini sorunsuz bir şekilde tamamlamalarını sağlıyoruz.\r\n\r\n"
-				+ "Yalım Rent a Car olarak, müşterilerimizin beklentilerini aşmayı ve her zaman en iyi hizmeti sunmayı taahhüt ediyoruz. "
-				+ "Profesyonel ve deneyimli ekibimizle birlikte, müşterilerimizin her türlü talebine hızlı ve etkili bir şekilde cevap veriyoruz.\r\n\r\n"
-				+ "Bizimle seyahat ettiğinizde, kalite, güvenlik ve müşteri memnuniyeti konusunda en yüksek standartları bulacaksınız. Yalım Rent a Car olarak, "
-				+ "sizlere unutulmaz bir araç kiralama deneyimi yaşatmak için buradayız.");
 		
-		// Text dosyası oluştur ve oradan oku.
+		//Hakkimizda text dosya okuma 
+		StringBuilder stringBuilder = new StringBuilder();
+		try (BufferedReader br = new BufferedReader(new FileReader("hakkımızda.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+            	stringBuilder.append(line).append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        txtpnHakkimizda.setText(stringBuilder.toString());
+        contentPane.add(new JScrollPane(txtpnHakkimizda));
 		
 		txtpnHakkimizda.setBounds(20, 57, 957, 272);
 		contentPane.add(txtpnHakkimizda);

@@ -91,7 +91,8 @@ public class AdminGiriş extends JFrame {
 				                    fr.close();
 				                    if (found) {
 				                        AdminEkrani adminEkrani = new AdminEkrani();
-				                        setVisible(false);
+				                        adminEkrani.setVisible(true); 
+				                        
 				                    }
 				                } catch (Exception exp) {
 				                    System.out.println("Okuma operasyonu başarılı ancak kapatma başarısız...");
