@@ -147,6 +147,16 @@ public class KiralamaEkranı extends JFrame {
 		dateChooserDonüs.setBounds(836, 191, 209, 40);
 		contentPane.add(dateChooserDonüs);
 
+		dateChooserAlis.addPropertyChangeListener(new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				if ("date".equals(evt.getPropertyName())) {
+					LocalDate selectedDate = ((java.util.Date) evt.getNewValue()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+					dateChooserDonüs.getDateEditor().setMinSelectableDate(Date.from(selectedDate.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+				}
+			}
+		});
+
 		// Labels
 		alistarihi = new JLabel("Alış Tarihi : ");
 		alistarihi.setForeground(Color.ORANGE);

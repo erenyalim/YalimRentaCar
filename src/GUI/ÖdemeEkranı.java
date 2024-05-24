@@ -6,10 +6,7 @@ import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import javax.swing.ImageIcon;
@@ -43,10 +40,11 @@ public class ÖdemeEkranı extends JFrame {
     protected Araç selectedAraç;
     private JLabel lbldenecekTutar;
 
-    public ÖdemeEkranı(long günSayisi, String hoşgeldinkullanici, long toplamFiyat) {
+    public ÖdemeEkranı(long günSayisi, String hoşgeldinkullanici, long toplamFiyat,Araç selectedAraç) {
         this.hoşgeldinkullanici = hoşgeldinkullanici;
         this.günSayisi = günSayisi;
         this.toplamfiyat = toplamFiyat;
+        this.selectedAraç = selectedAraç;
 
         Container cp = getContentPane();
 
@@ -81,6 +79,18 @@ public class ÖdemeEkranı extends JFrame {
         kartNo.setColumns(10);
         kartNo.setBounds(192, 162, 297, 36);
         contentPane.add(kartNo);
+        kartNo.addKeyListener((KeyListener) new KeyAdapter() {
+                    public void keyTyped(KeyEvent e) {
+                        char c = e.getKeyChar();
+                        if (kartNo.getText().length() >= 16) {
+                            e.consume();
+                        }
+                        if(!Character.isDigit(c)) {
+                            e.consume();
+                        }
+                    }
+                }
+        );
 
         cvv = new JTextField();
         cvv.setForeground(Color.LIGHT_GRAY);
@@ -88,6 +98,18 @@ public class ÖdemeEkranı extends JFrame {
         cvv.setColumns(10);
         cvv.setBounds(752, 162, 124, 36);
         contentPane.add(cvv);
+        cvv.addKeyListener((KeyListener) new KeyAdapter() {
+                    public void keyTyped(KeyEvent e) {
+                        char c = e.getKeyChar();
+                        if (cvv.getText().length() >= 4) {
+                            e.consume();
+                        }
+                        if(!Character.isDigit(c)) {
+                            e.consume();
+                        }
+                    }
+                }
+        );
 
         String[] aylar = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
         ay = new JComboBox<>(aylar);
@@ -151,7 +173,7 @@ public class ÖdemeEkranı extends JFrame {
                                 && strArray[1].equals(ay.getSelectedItem())
                                 && strArray[2].equals(yil.getSelectedItem())) {
                             found = true;
-                            JOptionPane.showMessageDialog(ÖdemeEkranı.this, "Ödemeniz başarıyla alınmıştır. Yalım Rent a car hizmetimizi tercih ettiğiniz için teşekkür ederiz. Aracınızı tercih ettiğiniz bayimizden teslim alabilirsiniz.");
+                            JOptionPane.showMessageDialog(ÖdemeEkranı.this, "Ödemeniz başarıyla alınmıştır. Yalım Rent a Car'ı tercih ettiğiniz için teşekkür ederiz. Aracınızı tercih ettiğiniz bayimizden teslim alabilirsiniz.");
                             KiralamaEkranı kiralamaEkranı = new KiralamaEkranı(hoşgeldinkullanici);
                             setVisible(false);
                             break;
@@ -201,7 +223,7 @@ public class ÖdemeEkranı extends JFrame {
         lblCvv.setBounds(752, 130, 92, 21);
         contentPane.add(lblCvv);
 
-        lbldenecekTutar = new JLabel("Ödenecek Tutar : " + getToplamfiyat());
+        lbldenecekTutar = new JLabel("Ödenecek Tutar : " + getToplamfiyat() + "TL");
         lbldenecekTutar.setForeground(Color.ORANGE);
         lbldenecekTutar.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 10));
         lbldenecekTutar.setAlignmentX(0.5f);
@@ -216,6 +238,6 @@ public class ÖdemeEkranı extends JFrame {
     }
 
     public long getToplamfiyat() {
-        return toplamfiyat;
+        return selectedAraç.getPrice()*günSayisi;
     }
 }

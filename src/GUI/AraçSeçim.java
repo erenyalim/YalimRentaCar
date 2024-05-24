@@ -32,11 +32,11 @@ public class AraçSeçim extends JFrame {
     private JButton btnGeri;
     private long gunSayisi;
     private DefaultTableModel araçTabloModel;
-    private String hoşgeldinKullanici;
+    private String hoşgeldinkullanici;
 
-    public AraçSeçim(long günSayisi, String hoşgeldinKullanici) {
+    public AraçSeçim(long günSayisi, String hoşgeldinkullanici) {
         this.gunSayisi = günSayisi;
-        this.hoşgeldinKullanici = hoşgeldinKullanici;
+        this.hoşgeldinkullanici = hoşgeldinkullanici;
 
         setResizable(false);
         setTitle("Yalım Rent a Car");
@@ -126,7 +126,7 @@ public class AraçSeçim extends JFrame {
     }
 
     public String getHoşgeldinKullanici() {
-        return hoşgeldinKullanici;
+        return hoşgeldinkullanici;
     }
 
     class ButtonRenderer extends JButton implements TableCellRenderer {
@@ -167,7 +167,7 @@ public class AraçSeçim extends JFrame {
             if (isPushed) {
                 int selectedRow = ((JTable) button.getParent()).getSelectedRow();
                 Araç selectedAraç = araçListesi.get(selectedRow);
-                SürücüDetay sürücüDetay = new SürücüDetay(günSayisi, hoşgeldinKullanici, selectedAraç);
+                SürücüDetay sürücüDetay = new SürücüDetay(günSayisi, hoşgeldinkullanici, selectedAraç);
                 setVisible(false);
                 dispose();
             }

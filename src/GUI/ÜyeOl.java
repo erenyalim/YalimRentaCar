@@ -21,11 +21,8 @@ import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -219,7 +216,6 @@ public class ÜyeOl extends JFrame {
 		// T.C Kimlik Numarası
 		
 		txtTcKimlikNo = new JTextField();
-	
 		txtTcKimlikNo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -235,6 +231,19 @@ public class ÜyeOl extends JFrame {
 		txtTcKimlikNo.setColumns(10);
 		txtTcKimlikNo.setBounds(483, 105, 297, 36);
 		contentPane.add(txtTcKimlikNo);
+
+		txtTcKimlikNo.addKeyListener((KeyListener) new KeyAdapter() {
+					public void keyTyped(KeyEvent e) {
+						char c = e.getKeyChar();
+						if (txtTcKimlikNo.getText().length() >= 11) {
+							e.consume();
+						}
+						if(!Character.isDigit(c)) {
+							e.consume();
+						}
+					}
+				}
+		);
 
 		// Parola
 		textparola = new JTextField();

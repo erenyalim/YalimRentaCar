@@ -177,7 +177,7 @@ public class SürücüDetay extends JFrame {
                         fWriter = new FileWriter("sürücü.txt", true);
                         fWriter.write(temp);
                         JOptionPane.showMessageDialog(SürücüDetay.this, "Sürücü bilgileri kayıt edildi.");
-                        ÖdemeEkranı ödeme = new ÖdemeEkranı(günSayisi, hoşgeldinkullanici, toplamFiyat);
+                        ÖdemeEkranı ödeme = new ÖdemeEkranı(günSayisi, hoşgeldinkullanici, toplamFiyat,selectedAraç);
                         setVisible(false);
                         
                     } catch (IOException exp) {
@@ -201,6 +201,14 @@ public class SürücüDetay extends JFrame {
         contentPane.add(btnkaydet);
 
         btngeridön = new JButton("Geri Dön");
+        btngeridön.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == btngeridön) {
+                    AraçSeçim girisEkrani = new AraçSeçim(günSayisi,hoşgeldinkullanici);
+                    setVisible(false);
+                }
+            }
+        });
         btngeridön.setForeground(Color.BLACK);
         btngeridön.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
         btngeridön.setBackground(Color.ORANGE);
