@@ -1,5 +1,7 @@
 package GUI;
 
+import com.toedter.calendar.JDateChooser;
+
 import java.awt.Color;
 
 import java.awt.Toolkit;
@@ -30,12 +32,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import java.awt.Cursor;
+import java.text.DateFormat;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class ÜyeOl extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtDogumTarihi;
+	private JDateChooser doğumtarihi;
 	private JTextField txtSoyad;
 	private JTextField txtAd;
 	private JTextField txtTcKimlikNo;
@@ -131,9 +136,9 @@ public class ÜyeOl extends JFrame {
 						FileWriter fWriter = null;
 						try {
 							tempId++;
-							String temp = tempId + "," + txtTcKimlikNo.getText().trim() + "," + txtAd.getText().trim()
-									+ "," + txtSoyad.getText().trim() + "," + txtDogumTarihi.getText().trim() + ","
-									+ txtKullaniciadi.getText().trim() + "," + textparola.getText().trim() + "\r\n";
+							Date date = doğumtarihi.getDate();
+							String strDate = DateFormat.getDateInstance().format(date);
+							String temp = tempId + "," + txtTcKimlikNo.getText().trim() + "," + txtAd.getText().trim() + "," + txtSoyad.getText().trim() + "," + strDate + "," + txtKullaniciadi.getText().trim() + "," + textparola.getText().trim() + "\r\n";
 							fWriter = new FileWriter("müşteri.txt", true);
 							fWriter.write(temp);
 							JOptionPane.showMessageDialog(ÜyeOl.this, "Kayıt olma başarılı.");
@@ -167,24 +172,13 @@ public class ÜyeOl extends JFrame {
 		contentPane.add(btnUyeol);
 
 		// Doğum Tarihi
-		txtDogumTarihi = new JTextField();
-		txtDogumTarihi.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (txtDogumTarihi.getText().equals("Doğum Tarihi")) {
-					txtDogumTarihi.setText("");
-					txtDogumTarihi.setForeground(Color.LIGHT_GRAY);
-				}
-			}
-		});
-		txtDogumTarihi.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		txtDogumTarihi.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		txtDogumTarihi.setText("Doğum Tarihi");
-		txtDogumTarihi.setForeground(Color.LIGHT_GRAY);
-		txtDogumTarihi.setFont(new Font("Yu Gothic Medium", Font.BOLD, 18));
-		txtDogumTarihi.setColumns(10);
-		txtDogumTarihi.setBounds(483, 246, 297, 36);
-		contentPane.add(txtDogumTarihi);
+
+		doğumtarihi = new JDateChooser();
+		doğumtarihi.setBounds(483, 246, 297, 36);
+		doğumtarihi.setDateFormatString("dd MMM yyyy");
+		contentPane.add(doğumtarihi);
+
+
 
 		// Soyad
 		txtSoyad = new JTextField();

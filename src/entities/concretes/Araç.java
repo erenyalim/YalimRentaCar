@@ -13,12 +13,10 @@ public class Araç {
 	private String plaka;
 	
 	public Araç() {
-		super();
 	}
 
 
 	public Araç(String marka, String model, String gövdetipi, String yakitTürü, String vites, int price, String plaka) {
-		super();
 		this.marka = marka;
 		this.model = model;
 		this.gövdetipi = gövdetipi;
