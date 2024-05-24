@@ -37,7 +37,7 @@ public class Main {
 		//KiralamaEkranı kiralamaEkranı = new KiralamaEkranı("İsim");
 		
 		//Araç Seçimi
-		AraçSeçim araçSeçim = new AraçSeçim(5,"İsim");
+		//AraçSeçim araçSeçim = new AraçSeçim(5,"İsim");
 		
 		//Sürücü Detay
 		//SürücüDetay sürücüDetay = new SürücüDetay(günSayisi,hoşgeldinkullanici);

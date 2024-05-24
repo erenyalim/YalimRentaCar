@@ -153,7 +153,7 @@ public class ÖdemeEkranı extends JFrame {
                             found = true;
                             JOptionPane.showMessageDialog(ÖdemeEkranı.this, "Ödemeniz başarıyla alınmıştır. Yalım Rent a car hizmetimizi tercih ettiğiniz için teşekkür ederiz. Aracınızı tercih ettiğiniz bayimizden teslim alabilirsiniz.");
                             KiralamaEkranı kiralamaEkranı = new KiralamaEkranı(hoşgeldinkullanici);
-                            kiralamaEkranı.setVisible(true);
+                            setVisible(false);
                             break;
                         }
                     }

@@ -173,7 +173,7 @@ public class SürücüDetay extends JFrame {
                     FileWriter fWriter = null;
                     try {
                         tempId++;
-                        String temp = tempId + "," + tcNo.getText().trim() + "," + ehliyetNo.getText().trim() + "," + txtAd.getText().trim() + "," + txtSoyad.getText().trim() + "," +  "\r\n";
+                        String temp = tempId + "," + tcNo.getText().trim() + "," + ehliyetNo.getText().trim() + "," + txtAd.getText().trim() + "," + txtSoyad.getText().trim() + "," + selectedAraç.getPlaka() + "\r\n";
                         fWriter = new FileWriter("sürücü.txt", true);
                         fWriter.write(temp);
                         JOptionPane.showMessageDialog(SürücüDetay.this, "Sürücü bilgileri kayıt edildi.");
@@ -200,10 +200,7 @@ public class SürücüDetay extends JFrame {
         btnkaydet.setBounds(483, 307, 134, 36);
         contentPane.add(btnkaydet);
 
-       
         btngeridön = new JButton("Geri Dön");
-        
-
         btngeridön.setForeground(Color.BLACK);
         btngeridön.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
         btngeridön.setBackground(Color.ORANGE);
