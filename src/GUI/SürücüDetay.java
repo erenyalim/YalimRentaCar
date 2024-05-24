@@ -16,6 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import entities.concretes.Araç;
+
 import javax.swing.JButton;
 
 public class SürücüDetay extends JFrame {
@@ -31,7 +34,7 @@ public class SürücüDetay extends JFrame {
 	private JButton btngeridön;
 	private long toplamfiyat;
 	
-	public SürücüDetay(long günSayisi, String hoşgeldinkullanici) {
+	public SürücüDetay(long günSayisi, String hoşgeldinkullanici,Araç selectedAraç) {
 		
 		setResizable(false);
 		setTitle("Yalım Rent a Car / Sürücü Detay");

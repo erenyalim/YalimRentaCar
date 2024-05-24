@@ -37,6 +37,7 @@ public class AraçSeçim extends JFrame {
     private long gunSayisi;
     private DefaultTableModel Araçtablo;
     private String hoşgeldinkullanici;
+	public Araç selectedAraç;
 
     public AraçSeçim(long günSayisi, String hoşgeldinkullanici) {
         this.gunSayisi = günSayisi;
@@ -98,15 +99,16 @@ public class AraçSeçim extends JFrame {
             columnModel.getColumn(i).setResizable(false);
         }
 
-        table.getColumn("Seç").setCellRenderer(new ButtonRenderer());
-        table.getColumn("Seç").setCellEditor(new ButtonEditor(new JButton()));
-
         List<Araç> araçListesi = araçlartxtOku();
         for (Araç arac : araçListesi) {
             long toplamFiyat = arac.getPrice() * gunSayisi;
             Araçtablo.addRow(new Object[]{arac.getMarka(), arac.getModel(), arac.getgövdetipi(), arac.getYakitTürü(), arac.getVites(), arac.getPrice() + "TL", arac.getPlaka(), toplamFiyat + "TL", "Seç"});
         }
 
+        table.getColumn("Seç").setCellRenderer(new ButtonRenderer());
+        table.getColumn("Seç").setCellEditor(new ButtonEditor(new JButton(), araçListesi, günSayisi, hoşgeldinkullanici));
+
+        
         setVisible(true);
     }
 
@@ -152,11 +154,19 @@ public class AraçSeçim extends JFrame {
         private JButton button;
         private String label;
         private boolean isPushed;
+        private List<Araç> araçListesi;
+        private long günSayisi;
+        private String hoşgeldinkullanici;
+        
+        
 
-        public ButtonEditor(JButton button) {
+        public ButtonEditor(JButton button, List<Araç> araçListesi, long günSayisi, String hoşgeldinkullanici) {
             this.button = button;
             this.button.setOpaque(true);
             this.button.addActionListener(this);
+            this.araçListesi = araçListesi;
+            this.günSayisi = günSayisi;
+            this.hoşgeldinkullanici = hoşgeldinkullanici;
         }
 
         @Override
@@ -170,13 +180,16 @@ public class AraçSeçim extends JFrame {
         @Override
         public Object getCellEditorValue() {
             if (isPushed) {
-                // action when button is clicked
-                System.out.println("Selected row: " + label);
-                // Implement the action here (e.g., open a new window or perform some logic)
+                int selectedRow = ((JTable) button.getParent()).getSelectedRow();
+                Araç selectedAraç = araçListesi.get(selectedRow);
+                SürücüDetay sürücüDetay =new SürücüDetay(günSayisi, hoşgeldinkullanici, selectedAraç);
+                setVisible(false);
             }
             isPushed = false;
             return label;
         }
+        
+        
 
         @Override
         public boolean stopCellEditing() {
@@ -187,6 +200,9 @@ public class AraçSeçim extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             fireEditingStopped();
+            // Seç butonuna tıklandığında sürücü detay ekranını aç
+            SürücüDetay sürücüDetay = new SürücüDetay(günSayisi, hoşgeldinkullanici, selectedAraç);
+            setVisible(false);
         }
 
         @Override
