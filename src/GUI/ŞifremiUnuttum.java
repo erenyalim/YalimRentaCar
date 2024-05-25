@@ -4,10 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -59,6 +56,28 @@ public class ŞifremiUnuttum extends JFrame {
 		
 		
 		txtTcKimlikNo = new JTextField();
+		txtTcKimlikNo.addKeyListener((KeyListener) new KeyAdapter() {
+					public void keyTyped(KeyEvent e) {
+						char c = e.getKeyChar();
+						if (txtTcKimlikNo.getText().length() >= 11) {
+							e.consume();
+						}
+						if(!Character.isDigit(c)) {
+							e.consume();
+						}
+					}
+				}
+		);
+		txtTcKimlikNo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (txtTcKimlikNo.getText().equals("T.C Kimlik Numarası")) {
+					txtTcKimlikNo.setText("");
+					txtTcKimlikNo.setForeground(Color.LIGHT_GRAY);
+				}
+			}
+		});
+
 		txtTcKimlikNo.setBackground(Color.WHITE);
 		txtTcKimlikNo.setText("T.C Kimlik Numarası");
 		txtTcKimlikNo.setForeground(Color.LIGHT_GRAY);
@@ -66,36 +85,28 @@ public class ŞifremiUnuttum extends JFrame {
 		txtTcKimlikNo.setColumns(10);
 		txtTcKimlikNo.setBounds(483, 129, 297, 36);
 		contentPane.add(txtTcKimlikNo);
+
 		
-		txtTcKimlikNo = new JTextField();
-		txtTcKimlikNo.addMouseListener(new MouseAdapter() {
-	            @Override
-	            public void mouseClicked(MouseEvent e) {
-	                if (txtTcKimlikNo.getText().equals("T.C Kimlik Numarası")) {
-	                	txtTcKimlikNo.setText("");
-	                	txtTcKimlikNo.setForeground(Color.LIGHT_GRAY);
-	                }
-	            }
-	        });
+
 		
 		txtKullaniciadi = new JTextField();
+		txtKullaniciadi.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (txtKullaniciadi.getText().equals("Kullanıcı Adı")) {
+					txtKullaniciadi.setText("");
+					txtKullaniciadi.setForeground(Color.LIGHT_GRAY);
+				}
+			}
+		});
 		txtKullaniciadi.setText("Kullanıcı Adı");
 		txtKullaniciadi.setForeground(Color.LIGHT_GRAY);
 		txtKullaniciadi.setFont(new Font("Yu Gothic Medium", Font.BOLD, 18));
 		txtKullaniciadi.setColumns(10);
 		txtKullaniciadi.setBounds(483, 176, 297, 36);
 		contentPane.add(txtKullaniciadi);
-		
-		txtKullaniciadi = new JTextField();
-		txtKullaniciadi.addMouseListener(new MouseAdapter() {
-	            @Override
-	            public void mouseClicked(MouseEvent e) {
-	                if (txtKullaniciadi.getText().equals("Kullanıcı Adı")) {
-	                	txtKullaniciadi.setText("");
-	                	txtKullaniciadi.setForeground(Color.LIGHT_GRAY);
-	                }
-	            }
-	        });
+
+
 		
 		btnGeriDn = new JButton("Geri Dön");
 		btnGeriDn.setForeground(Color.BLACK);
