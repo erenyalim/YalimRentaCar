@@ -33,10 +33,14 @@ public class AraçSeçim extends JFrame {
     private long gunSayisi;
     private DefaultTableModel araçTabloModel;
     private String hoşgeldinkullanici;
+    private String alışTarihi;
+    private String dönüşTarihi;
 
-    public AraçSeçim(long günSayisi, String hoşgeldinkullanici) {
+    public AraçSeçim(long günSayisi, String hoşgeldinkullanici, String alışTarihi, String dönüşTarihi) {
         this.gunSayisi = günSayisi;
         this.hoşgeldinkullanici = hoşgeldinkullanici;
+        this.alışTarihi = alışTarihi;
+        this.dönüşTarihi = dönüşTarihi;
 
         setResizable(false);
         setTitle("Yalım Rent a Car");
@@ -98,7 +102,7 @@ public class AraçSeçim extends JFrame {
         }
 
         table.getColumn("Seç").setCellRenderer(new ButtonRenderer());
-        table.getColumn("Seç").setCellEditor(new ButtonEditor(new JButton(), araçListesi, günSayisi));
+        table.getColumn("Seç").setCellEditor(new ButtonEditor(new JButton(), araçListesi, günSayisi, hoşgeldinkullanici, alışTarihi, dönüşTarihi));
 
         setVisible(true);
     }
@@ -146,13 +150,19 @@ public class AraçSeçim extends JFrame {
         private boolean isPushed;
         private List<Araç> araçListesi;
         private long günSayisi;
+        private String hoşgeldinkullanici;
+        private String alışTarihi;
+        private String dönüşTarihi;
 
-        public ButtonEditor(JButton button, List<Araç> araçListesi, long günSayisi) {
+        public ButtonEditor(JButton button, List<Araç> araçListesi, long günSayisi, String hoşgeldinkullanici, String alışTarihi, String dönüşTarihi) {
             this.button = button;
             this.button.setOpaque(true);
             this.button.addActionListener(this);
             this.araçListesi = araçListesi;
             this.günSayisi = günSayisi;
+            this.hoşgeldinkullanici = hoşgeldinkullanici;
+            this.alışTarihi = alışTarihi;
+            this.dönüşTarihi = dönüşTarihi;
         }
 
         @Override

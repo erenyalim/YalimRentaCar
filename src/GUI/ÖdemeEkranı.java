@@ -167,7 +167,7 @@ public class ÖdemeEkranı extends JFrame {
                     String[] strArray;
                     while ((line = br.readLine()) != null) {
                         strArray = line.split(",");
-                        if ((strArray.length >= 3) 
+                        if ((strArray.length >= 3)
                                 && strArray[0].equals(kartNo.getText().trim())
                                 && strArray[1].equals(ay.getSelectedItem())
                                 && strArray[2].equals(yil.getSelectedItem())) {

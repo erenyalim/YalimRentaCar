@@ -4,10 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -32,17 +29,19 @@ public class SürücüDetay extends JFrame {
     private JLabel sürücüDetaylari;
     private JButton btnkaydet;
     private JButton btngeridön;
-	private long toplamFiyat;
-	private Araç selectedAraç;
-	private long günSayisi;
-	private String hoşgeldinkullanici;
+    private long toplamFiyat;
+    private Araç selectedAraç;
+    private long günSayisi;
+    private String hoşgeldinkullanici;
+    private String alışTarihi;  // Yeni değişken
+    private String dönüşTarihi;  // Yeni değişken
 
-	public SürücüDetay(long günSayisi, String hoşgeldinkullanici, Araç selectedAraç) {
-		this.günSayisi = günSayisi;
-		this.hoşgeldinkullanici = hoşgeldinkullanici;
-		this.selectedAraç = selectedAraç;
-		
-		setResizable(false);
+    public SürücüDetay(long günSayisi, String hoşgeldinkullanici, Araç selectedAraç) {
+        this.günSayisi = günSayisi;
+        this.hoşgeldinkullanici = hoşgeldinkullanici;
+        this.selectedAraç = selectedAraç;
+
+        setResizable(false);
         setTitle("Yalım Rent a Car / Sürücü Detay");
         setIconImage(Toolkit.getDefaultToolkit().getImage("YalımRentaCar.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,7 +65,7 @@ public class SürücüDetay extends JFrame {
         tcNo.setColumns(10);
         tcNo.setBounds(483, 119, 297, 36);
         contentPane.add(tcNo);
-        
+
         tcNo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -76,7 +75,20 @@ public class SürücüDetay extends JFrame {
                 }
             }
         });
-        
+
+        tcNo.addKeyListener((KeyListener) new KeyAdapter() {
+                    public void keyTyped(KeyEvent e) {
+                        char c = e.getKeyChar();
+                        if (tcNo.getText().length() >= 11) {
+                            e.consume();
+                        }
+                        if(!Character.isDigit(c)) {
+                            e.consume();
+                        }
+                    }
+                }
+        );
+
         ehliyetNo = new JTextField();
         ehliyetNo.setText("Ehliyet Numarası");
         ehliyetNo.setForeground(Color.LIGHT_GRAY);
@@ -93,6 +105,19 @@ public class SürücüDetay extends JFrame {
                 }
             }
         });
+
+        ehliyetNo.addKeyListener((KeyListener) new KeyAdapter() {
+                    public void keyTyped(KeyEvent e) {
+                        char c = e.getKeyChar();
+                        if (ehliyetNo.getText().length() >= 6) {
+                            e.consume();
+                        }
+                        if(!Character.isDigit(c)) {
+                            e.consume();
+                        }
+                    }
+                }
+        );
 
         txtAd = new JTextField();
         txtAd.setText("Ad");
@@ -179,7 +204,7 @@ public class SürücüDetay extends JFrame {
                         JOptionPane.showMessageDialog(SürücüDetay.this, "Sürücü bilgileri kayıt edildi.");
                         ÖdemeEkranı ödeme = new ÖdemeEkranı(günSayisi, hoşgeldinkullanici, toplamFiyat,selectedAraç);
                         setVisible(false);
-                        
+
                     } catch (IOException exp) {
                         System.out.println("Araç ekleme işlemi başarısız.");
                     } finally {
@@ -194,7 +219,7 @@ public class SürücüDetay extends JFrame {
                 }
             }
         });
-        
+
         btnkaydet.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
         btnkaydet.setBackground(Color.ORANGE);
         btnkaydet.setBounds(483, 307, 134, 36);
@@ -204,7 +229,7 @@ public class SürücüDetay extends JFrame {
         btngeridön.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == btngeridön) {
-                    AraçSeçim girisEkrani = new AraçSeçim(günSayisi,hoşgeldinkullanici);
+                    AraçSeçim girisEkrani = new AraçSeçim(günSayisi,hoşgeldinkullanici,alışTarihi,dönüşTarihi);
                     setVisible(false);
                 }
             }
@@ -218,11 +243,11 @@ public class SürücüDetay extends JFrame {
         setVisible(true);
     }
 
-	public long getGünSayisi() {
-		return günSayisi;
-	}
+    public long getGünSayisi() {
+        return günSayisi;
+    }
 
-	public String getHoşgeldinkullanici() {
-		return hoşgeldinkullanici;
-	}
+    public String getHoşgeldinkullanici() {
+        return hoşgeldinkullanici;
+    }
 }

@@ -189,7 +189,7 @@ public class GirisEkrani extends JFrame {
 
                 if(e.getSource()==btnHakkimizda) {
 
-                	Hakkimizda girisEkrani = new Hakkimizda();
+                	Hakkimizda hakkimizda = new Hakkimizda();
                     setVisible(false);
 
                 }

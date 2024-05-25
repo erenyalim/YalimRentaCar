@@ -32,6 +32,8 @@ public class KiralamaEkranı extends JFrame {
 	private JLabel lblHosgeldin;
 	private JLabel lblYalmRentA;
 	private String hoşgeldinkullanici;
+	private String alışTarihi;
+	private String dönüşTarihi;
 
 	public KiralamaEkranı(String hoşgeldinkullanici) {
 		this.hoşgeldinkullanici = hoşgeldinkullanici;
@@ -68,13 +70,13 @@ public class KiralamaEkranı extends JFrame {
 
 				if (comboAlis.getSelectedItem() != null && comboDönüs.getSelectedItem() != null) {
 					if (e.getSource() == teklifleriGöster) { // getsource hangi nesneden geldiğini belirler. burda e
-																// actionı btncik dan mı geldiğini kontrol ediyor.
+						// actionı btncik dan mı geldiğini kontrol ediyor.
 						LocalDate alisTarihi = dateChooserAlis.getDate().toInstant().atZone(ZoneId.systemDefault())
 								.toLocalDate();
 						LocalDate donusTarihi = dateChooserDonüs.getDate().toInstant().atZone(ZoneId.systemDefault())
 								.toLocalDate();
 						long gunSayisi = ChronoUnit.DAYS.between(alisTarihi, donusTarihi);
-						AraçSeçim araçSeçim = new AraçSeçim(gunSayisi, gethoşgeldinkullanici());
+						AraçSeçim araçSeçim = new AraçSeçim(gunSayisi, gethoşgeldinkullanici(),alışTarihi,dönüşTarihi);
 						setVisible(false);
 					}
 				} else {
@@ -94,7 +96,7 @@ public class KiralamaEkranı extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == btncik) { // getsource hangi nesneden geldiğini belirler. burda e actionı btncik
-												// dan mı geldiğini kontrol ediyor.
+					// dan mı geldiğini kontrol ediyor.
 					GirisEkrani girisEkrani = new GirisEkrani();
 					setVisible(false);
 				}
