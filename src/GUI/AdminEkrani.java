@@ -331,10 +331,10 @@ public class AdminEkrani extends JFrame {
 		labelparola.setBounds(80, 556, 65, 14);
 		contentPane.add(labelparola);
 
-		JLabel kiralananaraçlarımız = new JLabel("Kiralanan Araçlarımız");
+		JLabel kiralananaraçlarımız = new JLabel("Kiralanan Araçlarımız ve Sürücüler");
 		kiralananaraçlarımız.setForeground(new Color(163, 139, 61));
 		kiralananaraçlarımız.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 25));
-		kiralananaraçlarımız.setBounds(319, 49, 258, 30);
+		kiralananaraçlarımız.setBounds(319, 49, 421, 30);
 		contentPane.add(kiralananaraçlarımız);
 
 		//Kiralanan Araç Table 
@@ -357,7 +357,7 @@ public class AdminEkrani extends JFrame {
 
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(50, 80, 1180, 500);
+		scrollPane.setBounds(307, 81, 947, 574);
 		contentPane.add(scrollPane);
 
 		TableColumnModel columnModel = table.getColumnModel();
