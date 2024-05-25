@@ -46,7 +46,6 @@ public class ÖdemeEkranı extends JFrame {
         this.toplamfiyat = toplamFiyat;
         this.selectedAraç = selectedAraç;
 
-        Container cp = getContentPane();
 
         setResizable(false);
         setTitle("Yalım Rent a Car");

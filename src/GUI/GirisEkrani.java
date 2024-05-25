@@ -197,15 +197,15 @@ public class GirisEkrani extends JFrame {
 		
 		// Araba resim
 		arabalarLabel = new JLabel("");
-		arabalarLabel.setIcon(new ImageIcon("girisekranıaraba.png"));
+		arabalarLabel.setIcon(new ImageIcon("arabalargiris.png"));
 		arabalarLabel.setForeground(Color.DARK_GRAY);
-		arabalarLabel.setBounds(373, 104, 830, 450);
+		arabalarLabel.setBounds(392, 104, 915, 476);
 		contentPane.add(arabalarLabel);
 		
 		// Line 
 		JLabel lineLabel = new JLabel();
 		lineLabel.setIcon(new ImageIcon("Line.png"));
-		lineLabel.setBounds(0, 222, 1275, 175);
+		lineLabel.setBounds(0, 230, 1275, 193);
 		contentPane.add(lineLabel);
 		
 		// Slogan 

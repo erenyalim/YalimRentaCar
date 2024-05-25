@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
+import javax.swing.JTable;
 
 public class AdminEkrani extends JFrame {
 
@@ -42,6 +44,7 @@ public class AdminEkrani extends JFrame {
 	private JComboBox boxyakittürü;
 	private JLabel lblVites;
 	private JPasswordField passwordField;
+	private JTable table;
 
 	public AdminEkrani() {
 
@@ -221,7 +224,7 @@ public class AdminEkrani extends JFrame {
 		lblAdminEkle = new JLabel("Admin Ekle");
 		lblAdminEkle.setForeground(new Color(163, 139, 61));
 		lblAdminEkle.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 25));
-		lblAdminEkle.setBounds(444, 49, 150, 30);
+		lblAdminEkle.setBounds(80, 483, 150, 30);
 		contentPane.add(lblAdminEkle);
 
 		txtKullancAd = new JTextField();
@@ -229,12 +232,12 @@ public class AdminEkrani extends JFrame {
 		txtKullancAd.setForeground(Color.LIGHT_GRAY);
 		txtKullancAd.setFont(new Font("Yu Gothic Medium", Font.BOLD | Font.ITALIC, 12));
 		txtKullancAd.setColumns(10);
-		txtKullancAd.setBounds(416, 90, 190, 21);
+		txtKullancAd.setBounds(80, 524, 190, 21);
 		contentPane.add(txtKullancAd);
 		
 		passwordField = new JPasswordField();
 		passwordField.setName("Parola");
-		passwordField.setBounds(416, 120, 190, 19);
+		passwordField.setBounds(80, 577, 190, 19);
 		contentPane.add(passwordField);
 
 		btnAdminEkle = new JButton("Admin Ekle");
@@ -306,7 +309,7 @@ public class AdminEkrani extends JFrame {
 		btnAdminEkle.setForeground(Color.BLACK);
 		btnAdminEkle.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
 		btnAdminEkle.setBackground(Color.ORANGE);
-		btnAdminEkle.setBounds(416, 166, 111, 40);
+		btnAdminEkle.setBounds(80, 615, 111, 40);
 		contentPane.add(btnAdminEkle);
 
 		JLabel lblKasaTipi = new JLabel("Kasa Tipi :");
@@ -326,6 +329,24 @@ public class AdminEkrani extends JFrame {
 		lblVites.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
 		lblVites.setBounds(80, 267, 65, 14);
 		contentPane.add(lblVites);
+		
+		JLabel labelparola = new JLabel("Parola : ");
+		labelparola.setForeground(new Color(163, 139, 61));
+		labelparola.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
+		labelparola.setBounds(80, 556, 65, 14);
+		contentPane.add(labelparola);
+		
+		JLabel kiralananaraçlarımız = new JLabel("Kiralanan Araçlarımız");
+		kiralananaraçlarımız.setForeground(new Color(163, 139, 61));
+		kiralananaraçlarımız.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 25));
+		kiralananaraçlarımız.setBounds(319, 49, 258, 30);
+		contentPane.add(kiralananaraçlarımız);
+		
+		//Kiralanan Araç Table 
+		
+		table = new JTable();
+		table.setBounds(319, 90, 935, 580);
+		contentPane.add(table);
 		
 
 		setVisible(true);
