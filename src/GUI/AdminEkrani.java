@@ -59,8 +59,8 @@ public class AdminEkrani extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+		//Çıkış butonu
 		btncik = new JButton("Çıkış yap");
-
 		btncik.addActionListener(new ActionListener() {
 
 			@Override
@@ -76,13 +76,14 @@ public class AdminEkrani extends JFrame {
 		btncik.setBounds(1143, 11, 111, 40);
 		contentPane.add(btncik);
 
-		// Araç Ekle
+		// Araç Ekle Yazı
 		araçekle = new JLabel("Araç Ekle");
 		araçekle.setForeground(new Color(163, 139, 61));
 		araçekle.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 25));
 		araçekle.setBounds(117, 49, 121, 30);
 		contentPane.add(araçekle);
 
+		//Marka
 		txtMarka = new JTextField();
 		txtMarka.setText("Marka");
 		txtMarka.setForeground(Color.LIGHT_GRAY);
@@ -91,6 +92,7 @@ public class AdminEkrani extends JFrame {
 		txtMarka.setBounds(80, 90, 190, 21);
 		contentPane.add(txtMarka);
 
+		//Model
 		txtModel = new JTextField();
 		txtModel.setText("Model");
 		txtModel.setForeground(Color.LIGHT_GRAY);
@@ -99,24 +101,28 @@ public class AdminEkrani extends JFrame {
 		txtModel.setBounds(80, 122, 190, 21);
 		contentPane.add(txtModel);
 
+		//Kasa Tipi
 		String[] kasaTipi = {"Sedan", "SUV", "Coupe", "Hatchback", "Cabrio"};
 		boxkasaTipi = new JComboBox(kasaTipi);
 		boxkasaTipi.setSelectedIndex(-1);
 		boxkasaTipi.setBounds(80, 176, 190, 21);
 		contentPane.add(boxkasaTipi);
 
+		//Yakit Türü
 		String[] yakittürü = {"Benzin", "Dizel", "Elektrikli"};
 		boxyakittürü = new JComboBox(yakittürü);
 		boxyakittürü.setSelectedIndex(-1);
 		boxyakittürü.setBounds(80, 234, 190, 21);
 		contentPane.add(boxyakittürü);
 
+		//Vites
 		String[] vites = {"Otomatik", "Manuel"};
 		boxvites = new JComboBox(vites);
 		boxvites.setSelectedIndex(-1);
 		boxvites.setBounds(80, 292, 190, 21);
 		contentPane.add(boxvites);
 
+		//Günlük Ücret
 		txtGnlkcret = new JTextField();
 		txtGnlkcret.setText("Günlük Ücret");
 		txtGnlkcret.setForeground(Color.LIGHT_GRAY);
@@ -125,6 +131,7 @@ public class AdminEkrani extends JFrame {
 		txtGnlkcret.setBounds(80, 333, 190, 21);
 		contentPane.add(txtGnlkcret);
 
+		//Plaka
 		txtPlaka = new JTextField();
 		txtPlaka.setText("Plaka");
 		txtPlaka.setForeground(Color.LIGHT_GRAY);
@@ -133,8 +140,8 @@ public class AdminEkrani extends JFrame {
 		txtPlaka.setBounds(80, 365, 190, 21);
 		contentPane.add(txtPlaka);
 
+		//Araç Ekle Buton
 		btnAracEkle = new JButton("Aracı Ekle");
-
 		btnAracEkle.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
@@ -216,12 +223,14 @@ public class AdminEkrani extends JFrame {
 		btnAracEkle.setBounds(80, 408, 111, 40);
 		contentPane.add(btnAracEkle);
 
+		//Admin Ekle Yazısı
 		lblAdminEkle = new JLabel("Admin Ekle");
 		lblAdminEkle.setForeground(new Color(163, 139, 61));
 		lblAdminEkle.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 25));
 		lblAdminEkle.setBounds(80, 483, 150, 30);
 		contentPane.add(lblAdminEkle);
 
+		//Kullanıcı Adı
 		txtKullancAd = new JTextField();
 		txtKullancAd.setText("Kullanıcı Adı");
 		txtKullancAd.setForeground(Color.LIGHT_GRAY);
@@ -230,13 +239,14 @@ public class AdminEkrani extends JFrame {
 		txtKullancAd.setBounds(80, 524, 190, 21);
 		contentPane.add(txtKullancAd);
 
+		//Parola
 		passwordField = new JPasswordField();
 		passwordField.setName("Parola");
 		passwordField.setBounds(80, 577, 190, 19);
 		contentPane.add(passwordField);
 
+		//Admin Ekle Buton
 		btnAdminEkle = new JButton("Admin Ekle");
-
 		btnAdminEkle.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
@@ -367,7 +377,7 @@ public class AdminEkrani extends JFrame {
 
 		List<Sürücü> sürücülistesi = kiralananaraçlarımız();
 		for (Sürücü sürücü : sürücülistesi) {
-			kiralananaraçTabloModel.addRow(new Object[]{sürücü.getId(),sürücü.getTckimlikNo(),sürücü.getEhliyetNo(),sürücü.getFirstName(),sürücü.getLastName()});
+			kiralananaraçTabloModel.addRow(new Object[]{sürücü.getId(),sürücü.getTckimlikNo(),sürücü.getEhliyetNo(),sürücü.getFirstName(),sürücü.getLastName(),sürücü.getPlaka(),sürücü.getAlıştarihi(),sürücü.getDönüştarihi()});
 		}
 
 
@@ -388,7 +398,7 @@ public class AdminEkrani extends JFrame {
 				String plaka = sürücübilgileri[5];
 				String alıştarihi = sürücübilgileri[6];
 				String dönüştarihi = sürücübilgileri[7];
-				Sürücü sürücü = new Sürücü(ad,soyad,id,tckimlikNo,ehliyetNo);
+				Sürücü sürücü = new Sürücü(ad,soyad,id,tckimlikNo,ehliyetNo,plaka,alıştarihi,dönüştarihi);
 				sürücülistesi.add(sürücü);
 			}
 		} catch (IOException e) {
