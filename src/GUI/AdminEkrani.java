@@ -101,6 +101,24 @@ public class AdminEkrani extends JFrame {
 		txtModel.setBounds(80, 122, 190, 21);
 		contentPane.add(txtModel);
 
+		JLabel lblKasaTipi = new JLabel("Kasa Tipi :");
+		lblKasaTipi.setForeground(new Color(163, 139, 61));
+		lblKasaTipi.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
+		lblKasaTipi.setBounds(80, 154, 62, 14);
+		contentPane.add(lblKasaTipi);
+
+		JLabel lblYaktTr = new JLabel("Yakıt Türü: ");
+		lblYaktTr.setForeground(new Color(163, 139, 61));
+		lblYaktTr.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
+		lblYaktTr.setBounds(80, 208, 65, 14);
+		contentPane.add(lblYaktTr);
+
+		lblVites = new JLabel("Vites : ");
+		lblVites.setForeground(new Color(163, 139, 61));
+		lblVites.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
+		lblVites.setBounds(80, 267, 65, 14);
+		contentPane.add(lblVites);
+
 		//Kasa Tipi
 		String[] kasaTipi = {"Sedan", "SUV", "Coupe", "Hatchback", "Cabrio"};
 		boxkasaTipi = new JComboBox(kasaTipi);
@@ -192,7 +210,7 @@ public class AdminEkrani extends JFrame {
 									+ boxkasaTipi.getSelectedItem().toString().trim() + ","
 									+ boxyakittürü.getSelectedItem().toString().trim() + ","
 									+ boxvites.getSelectedItem().toString().trim() + "," + txtGnlkcret.getText().trim()
-									+ "," + " " + "," + txtPlaka.getText().trim() + "\r\n";
+									+ "," + " " + "," + txtPlaka.getText().trim() +","+ "," + "\r\n";
 							fWriter = new FileWriter("araç.txt", true);
 							fWriter.write(temp);
 							JOptionPane.showMessageDialog(AdminEkrani.this, "Yeni araç eklendi.");
@@ -238,6 +256,12 @@ public class AdminEkrani extends JFrame {
 		txtKullancAd.setColumns(10);
 		txtKullancAd.setBounds(80, 524, 190, 21);
 		contentPane.add(txtKullancAd);
+
+		JLabel labelparola = new JLabel("Parola : ");
+		labelparola.setForeground(new Color(163, 139, 61));
+		labelparola.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
+		labelparola.setBounds(80, 556, 65, 14);
+		contentPane.add(labelparola);
 
 		//Parola
 		passwordField = new JPasswordField();
@@ -317,31 +341,9 @@ public class AdminEkrani extends JFrame {
 		btnAdminEkle.setBounds(80, 615, 111, 40);
 		contentPane.add(btnAdminEkle);
 
-		JLabel lblKasaTipi = new JLabel("Kasa Tipi :");
-		lblKasaTipi.setForeground(new Color(163, 139, 61));
-		lblKasaTipi.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
-		lblKasaTipi.setBounds(80, 154, 62, 14);
-		contentPane.add(lblKasaTipi);
+		//Table Yazı
 
-		JLabel lblYaktTr = new JLabel("Yakıt Türü: ");
-		lblYaktTr.setForeground(new Color(163, 139, 61));
-		lblYaktTr.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
-		lblYaktTr.setBounds(80, 208, 65, 14);
-		contentPane.add(lblYaktTr);
-
-		lblVites = new JLabel("Vites : ");
-		lblVites.setForeground(new Color(163, 139, 61));
-		lblVites.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
-		lblVites.setBounds(80, 267, 65, 14);
-		contentPane.add(lblVites);
-
-		JLabel labelparola = new JLabel("Parola : ");
-		labelparola.setForeground(new Color(163, 139, 61));
-		labelparola.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
-		labelparola.setBounds(80, 556, 65, 14);
-		contentPane.add(labelparola);
-
-		JLabel kiralananaraçlarımız = new JLabel("Kiralanan Araçlarımız ve Sürücüler");
+		JLabel kiralananaraçlarımız = new JLabel("Kiralanan Araçlarımız ve Sürücü Bilgileri");
 		kiralananaraçlarımız.setForeground(new Color(163, 139, 61));
 		kiralananaraçlarımız.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 25));
 		kiralananaraçlarımız.setBounds(319, 49, 421, 30);

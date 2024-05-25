@@ -33,8 +33,8 @@ public class SürücüDetay extends JFrame {
     private Araç selectedAraç;
     private long günSayisi;
     private String hoşgeldinkullanici;
-    private String alışTarihi;  // Yeni değişken
-    private String dönüşTarihi;  // Yeni değişken
+    private String alışTarihi;
+    private String dönüşTarihi;
 
     public SürücüDetay(long günSayisi, String hoşgeldinkullanici, Araç selectedAraç,String alışTarihi,String dönüşTarihi) {
         this.günSayisi = günSayisi;

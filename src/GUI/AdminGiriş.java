@@ -30,7 +30,6 @@ public class AdminGiriş extends JFrame {
 	private JButton btnGeriDn;
 	private JLabel line;
 
-
 	public AdminGiriş() {
 				//Frame
 				setResizable(false);
@@ -44,20 +43,21 @@ public class AdminGiriş extends JFrame {
 				
 				setContentPane(contentPane);
 				contentPane.setLayout(null);
-				
-				line = new JLabel();
-				line.setForeground(Color.ORANGE);
-				line.setIcon(new ImageIcon("Line.png"));
-				line.setBounds(0, 86, 1264, 6);
-				contentPane.add(line);
-				
-				
+
 				admingirisLabel = new JLabel("Admin Giriş");
 				admingirisLabel.setBounds(542, 27, 180, 36);
 				admingirisLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 				admingirisLabel.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 30));
 				admingirisLabel.setForeground(Color.ORANGE);
 				contentPane.add(admingirisLabel);
+
+				//Line
+				line = new JLabel();
+				line.setForeground(Color.ORANGE);
+				line.setIcon(new ImageIcon("Line.png"));
+				line.setBounds(0, 86, 1264, 6);
+				contentPane.add(line);
+
 				
 				btnGirisyap = new JButton("Giriş Yap");
 				btnGirisyap.addActionListener(new ActionListener() {
@@ -90,8 +90,10 @@ public class AdminGiriş extends JFrame {
 				                try {
 				                    fr.close();
 				                    if (found) {
+				                       	dispose();
 				                        AdminEkrani adminEkrani = new AdminEkrani();
-				                        adminEkrani.setVisible(true); 
+				                        setVisible(false);
+
 				                        
 				                    }
 				                } catch (Exception exp) {

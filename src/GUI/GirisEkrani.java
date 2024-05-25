@@ -72,20 +72,6 @@ public class GirisEkrani extends JFrame {
 		btnAdmin.setBounds(1141, 23, 113, 35);
 		contentPane.add(btnAdmin);
 		
-		// Giriş Ekranı to Admin Giriş
-		btnAdmin.addActionListener(new ActionListener() {
-
-
-            public void actionPerformed(ActionEvent e) {
-
-                if(e.getSource()==btnAdmin) {
-
-                	AdminGiriş admingiriş = new AdminGiriş();
-                    setVisible(false);
-
-                }
-            }});
-		
 		//Admin buton renk değişim ayarı
 		btnAdmin.addMouseListener(new MouseAdapter() {
 

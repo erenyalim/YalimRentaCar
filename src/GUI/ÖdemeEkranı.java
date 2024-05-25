@@ -135,7 +135,7 @@ public class ÖdemeEkranı extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 SürücüDetay sürücüDetay = new SürücüDetay(günSayisi, hoşgeldinkullanici, selectedAraç,alıştarihi,dönüştarihi);
                 sürücüDetay.setVisible(true);
-                dispose();  // Bu pencereyi kapat
+                dispose();
             }
         });
 
