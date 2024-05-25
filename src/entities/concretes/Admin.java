@@ -9,7 +9,7 @@ public class Admin extends İnsan {
 	}
 
 	public Admin(int adminId) {
-
+		super();
 		this.adminId = adminId;
 	}
 

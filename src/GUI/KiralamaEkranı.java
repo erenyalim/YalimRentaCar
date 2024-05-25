@@ -8,9 +8,12 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Locale;
 import javax.swing.*;
 
 import com.toedter.calendar.JDateChooser;
@@ -76,6 +79,11 @@ public class KiralamaEkranı extends JFrame {
 						LocalDate donusTarihi = dateChooserDonüs.getDate().toInstant().atZone(ZoneId.systemDefault())
 								.toLocalDate();
 						long gunSayisi = ChronoUnit.DAYS.between(alisTarihi, donusTarihi);
+
+						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.ENGLISH);
+						alışTarihi = alisTarihi.format(formatter);
+						dönüşTarihi = donusTarihi.format(formatter);
+
 						AraçSeçim araçSeçim = new AraçSeçim(gunSayisi, gethoşgeldinkullanici(),alışTarihi,dönüşTarihi);
 						setVisible(false);
 					}
@@ -143,7 +151,7 @@ public class KiralamaEkranı extends JFrame {
 		contentPane.add(dateChooserAlis);
 
 		dateChooserDonüs = new JDateChooser();
-		dateChooserAlis.setDateFormatString("dd MMM yyyy");
+		dateChooserDonüs.setDateFormatString("dd MMM yyyy");
 		dateChooserDonüs.setBackground(Color.DARK_GRAY);
 		dateChooserDonüs.getCalendarButton().setBackground(Color.ORANGE);
 		dateChooserDonüs.setBounds(836, 191, 209, 40);

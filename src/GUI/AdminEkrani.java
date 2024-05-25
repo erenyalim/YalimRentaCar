@@ -1,29 +1,26 @@
 package GUI;
 
+import entities.concretes.Araç;
+import entities.concretes.Sürücü;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.table.TableColumnModel;
 
 import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
-import javax.swing.JFormattedTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JTable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminEkrani extends JFrame {
 
@@ -45,6 +42,7 @@ public class AdminEkrani extends JFrame {
 	private JLabel lblVites;
 	private JPasswordField passwordField;
 	private JTable table;
+	private DefaultTableModel kiralananaraçTabloModel;
 
 	public AdminEkrani() {
 
@@ -101,19 +99,19 @@ public class AdminEkrani extends JFrame {
 		txtModel.setBounds(80, 122, 190, 21);
 		contentPane.add(txtModel);
 
-		String[] kasaTipi = { "Sedan", "SUV", "Coupe", "Hatchback", "Cabrio" };
+		String[] kasaTipi = {"Sedan", "SUV", "Coupe", "Hatchback", "Cabrio"};
 		boxkasaTipi = new JComboBox(kasaTipi);
 		boxkasaTipi.setSelectedIndex(-1);
 		boxkasaTipi.setBounds(80, 176, 190, 21);
 		contentPane.add(boxkasaTipi);
 
-		String[] yakittürü = { "Benzin", "Dizel", "Elektrikli" };
+		String[] yakittürü = {"Benzin", "Dizel", "Elektrikli"};
 		boxyakittürü = new JComboBox(yakittürü);
 		boxyakittürü.setSelectedIndex(-1);
 		boxyakittürü.setBounds(80, 234, 190, 21);
 		contentPane.add(boxyakittürü);
 
-		String[] vites = { "Otomatik", "Manuel" };
+		String[] vites = {"Otomatik", "Manuel"};
 		boxvites = new JComboBox(vites);
 		boxvites.setSelectedIndex(-1);
 		boxvites.setBounds(80, 292, 190, 21);
@@ -194,13 +192,10 @@ public class AdminEkrani extends JFrame {
 							dispose();
 							AdminEkrani adminEkrani = new AdminEkrani();
 							setVisible(false);
-						}
-						else {
+						} else {
 							JOptionPane.showMessageDialog(AdminEkrani.this, "Lütfen gerekli alanları doldurun.");
 						}
-					}
-
-					catch (IOException exp) {
+					} catch (IOException exp) {
 						System.out.println("Araç ekleme işlemi başarısız.");
 					} finally {
 						if (fWriter != null) {
@@ -234,7 +229,7 @@ public class AdminEkrani extends JFrame {
 		txtKullancAd.setColumns(10);
 		txtKullancAd.setBounds(80, 524, 190, 21);
 		contentPane.add(txtKullancAd);
-		
+
 		passwordField = new JPasswordField();
 		passwordField.setName("Parola");
 		passwordField.setBounds(80, 577, 190, 19);
@@ -329,26 +324,76 @@ public class AdminEkrani extends JFrame {
 		lblVites.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
 		lblVites.setBounds(80, 267, 65, 14);
 		contentPane.add(lblVites);
-		
+
 		JLabel labelparola = new JLabel("Parola : ");
 		labelparola.setForeground(new Color(163, 139, 61));
 		labelparola.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
 		labelparola.setBounds(80, 556, 65, 14);
 		contentPane.add(labelparola);
-		
+
 		JLabel kiralananaraçlarımız = new JLabel("Kiralanan Araçlarımız");
 		kiralananaraçlarımız.setForeground(new Color(163, 139, 61));
 		kiralananaraçlarımız.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 25));
 		kiralananaraçlarımız.setBounds(319, 49, 258, 30);
 		contentPane.add(kiralananaraçlarımız);
-		
+
 		//Kiralanan Araç Table 
-		
-		table = new JTable();
+
+		String[] kiralananaraçlar = {"İD", "T.C Kimlik No", "Ehliyet No", "Ad", "Soyad", "Plaka", "Alış Tarihi", "Dönüş Tarihi"};
+		kiralananaraçTabloModel = new DefaultTableModel(kiralananaraçlar, 0);
+
+		JTable table = new JTable(kiralananaraçTabloModel) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return column == 8;
+			}
+		};
+
+		table = new JTable(kiralananaraçTabloModel);
 		table.setBounds(319, 90, 935, 580);
+		table.setRowSelectionAllowed(false);
+		table.getTableHeader().setReorderingAllowed(false);
 		contentPane.add(table);
-		
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBounds(50, 80, 1180, 500);
+		contentPane.add(scrollPane);
+
+		TableColumnModel columnModel = table.getColumnModel();
+		for (int i = 0; i < columnModel.getColumnCount(); i++) {
+			columnModel.getColumn(i).setResizable(false);
+		}
+
+		List<Sürücü> sürücülistesi = kiralananaraçlarımız();
+		for (Sürücü sürücü : sürücülistesi) {
+			kiralananaraçTabloModel.addRow(new Object[]{sürücü.getId(),sürücü.getTckimlikNo(),sürücü.getEhliyetNo(),sürücü.getFirstName(),sürücü.getLastName()});
+		}
+
 
 		setVisible(true);
+	}
+
+	private List<Sürücü> kiralananaraçlarımız() {
+		List<Sürücü>  sürücülistesi = new ArrayList<>();
+		try (BufferedReader br = new BufferedReader(new FileReader("sürücü.txt"))) {
+			String satir;
+			while ((satir = br.readLine()) != null) {
+				String[] sürücübilgileri = satir.split(",");
+				int id = Integer.parseInt(sürücübilgileri[0]);
+				String tckimlikNo = sürücübilgileri[1];
+				String ehliyetNo = sürücübilgileri[2];
+				String ad = sürücübilgileri[3];
+				String soyad = sürücübilgileri[4];
+				String plaka = sürücübilgileri[5];
+				String alıştarihi = sürücübilgileri[6];
+				String dönüştarihi = sürücübilgileri[7];
+				Sürücü sürücü = new Sürücü(ad,soyad,id,tckimlikNo,ehliyetNo);
+				sürücülistesi.add(sürücü);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return sürücülistesi;
 	}
 }

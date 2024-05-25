@@ -39,6 +39,8 @@ public class ÖdemeEkranı extends JFrame {
     private long toplamfiyat;
     protected Araç selectedAraç;
     private JLabel lbldenecekTutar;
+    private String alıştarihi;
+    private String dönüştarihi;
 
     public ÖdemeEkranı(long günSayisi, String hoşgeldinkullanici, long toplamFiyat,Araç selectedAraç) {
         this.hoşgeldinkullanici = hoşgeldinkullanici;
@@ -131,7 +133,7 @@ public class ÖdemeEkranı extends JFrame {
         btngeridön.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SürücüDetay sürücüDetay = new SürücüDetay(günSayisi, hoşgeldinkullanici, selectedAraç);
+                SürücüDetay sürücüDetay = new SürücüDetay(günSayisi, hoşgeldinkullanici, selectedAraç,alıştarihi,dönüştarihi);
                 sürücüDetay.setVisible(true);
                 dispose();  // Bu pencereyi kapat
             }

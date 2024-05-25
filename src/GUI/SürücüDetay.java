@@ -36,10 +36,12 @@ public class SürücüDetay extends JFrame {
     private String alışTarihi;  // Yeni değişken
     private String dönüşTarihi;  // Yeni değişken
 
-    public SürücüDetay(long günSayisi, String hoşgeldinkullanici, Araç selectedAraç) {
+    public SürücüDetay(long günSayisi, String hoşgeldinkullanici, Araç selectedAraç,String alışTarihi,String dönüşTarihi) {
         this.günSayisi = günSayisi;
         this.hoşgeldinkullanici = hoşgeldinkullanici;
         this.selectedAraç = selectedAraç;
+        this.alışTarihi = alışTarihi;
+        this.dönüşTarihi = dönüşTarihi;
 
         setResizable(false);
         setTitle("Yalım Rent a Car / Sürücü Detay");
@@ -198,7 +200,7 @@ public class SürücüDetay extends JFrame {
                     FileWriter fWriter = null;
                     try {
                         tempId++;
-                        String temp = tempId + "," + tcNo.getText().trim() + "," + ehliyetNo.getText().trim() + "," + txtAd.getText().trim() + "," + txtSoyad.getText().trim() + "," + selectedAraç.getPlaka() + "\r\n";
+                        String temp = tempId + "," + tcNo.getText().trim() + "," + ehliyetNo.getText().trim() + "," + txtAd.getText().trim() + "," + txtSoyad.getText().trim() + "," + selectedAraç.getPlaka()+ "," + alışTarihi + "," + dönüşTarihi + "," + "\r\n";
                         fWriter = new FileWriter("sürücü.txt", true);
                         fWriter.write(temp);
                         JOptionPane.showMessageDialog(SürücüDetay.this, "Sürücü bilgileri kayıt edildi.");

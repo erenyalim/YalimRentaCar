@@ -177,7 +177,7 @@ public class AraçSeçim extends JFrame {
             if (isPushed) {
                 int selectedRow = ((JTable) button.getParent()).getSelectedRow();
                 Araç selectedAraç = araçListesi.get(selectedRow);
-                SürücüDetay sürücüDetay = new SürücüDetay(günSayisi, hoşgeldinkullanici, selectedAraç);
+                SürücüDetay sürücüDetay = new SürücüDetay(günSayisi, hoşgeldinkullanici, selectedAraç,alışTarihi,dönüşTarihi);
                 setVisible(false);
                 dispose();
             }

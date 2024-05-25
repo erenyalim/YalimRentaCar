@@ -3,17 +3,13 @@ package entities.abstracts;
 public abstract class İnsan {
 	private String firstName;
 	private String lastName;
-	private String userName;
-	private String password;
 
 	public İnsan() {
 	}
 
-	public İnsan(String firstName, String lastName, String userName,String password) {
+	public İnsan(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.userName = userName;
-		this.password = password;
 	}
 
 	public String getFirstName() {
@@ -32,21 +28,5 @@ public abstract class İnsan {
 		this.lastName = lastName;
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 }
