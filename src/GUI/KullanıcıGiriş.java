@@ -4,10 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import javax.swing.ImageIcon;
@@ -17,11 +14,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 public class KullanıcıGiriş extends JFrame {
 
     private JPanel contentPane;
-    private JTextField txtParola;
     private JTextField txtkullaniciadi;
     private JLabel kullanicigirisLabel;
     private JButton btnGirisyap;
@@ -29,6 +26,7 @@ public class KullanıcıGiriş extends JFrame {
     private JButton btnSifremiUnuttum;
     private JLabel line;
     private String hoşgeldinkullanici;
+    private JPasswordField parolafield;
 
     public KullanıcıGiriş() {
         // Frame
@@ -72,7 +70,7 @@ public class KullanıcıGiriş extends JFrame {
                     while ((line = br.readLine()) != null) {
                         strArray = line.split(",");
                         if ((strArray.length > 6) && (strArray[5].equals(txtkullaniciadi.getText().trim()))
-                                && (strArray[6].equals(txtParola.getText().trim()))) {
+                                && new String(parolafield.getPassword()).equals(strArray[6])) {
                             found = true;
                             hoşgeldinkullanici = strArray[2];
                             break;
@@ -104,7 +102,7 @@ public class KullanıcıGiriş extends JFrame {
         btnGirisyap.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
         btnGirisyap.setBackground(Color.ORANGE);
         btnGirisyap.setForeground(Color.BLACK);
-        btnGirisyap.setBounds(486, 217, 117, 36);
+        btnGirisyap.setBounds(482, 237, 117, 36);
         contentPane.add(btnGirisyap);
 
         btnGirisyap.addMouseListener(new MouseAdapter() {
@@ -121,7 +119,7 @@ public class KullanıcıGiriş extends JFrame {
         btnGeriDn.setForeground(Color.BLACK);
         btnGeriDn.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
         btnGeriDn.setBackground(Color.ORANGE);
-        btnGeriDn.setBounds(662, 217, 117, 36);
+        btnGeriDn.setBounds(662, 237, 117, 36);
         contentPane.add(btnGeriDn);
 
         btnGeriDn.addMouseListener(new MouseAdapter() {
@@ -142,25 +140,6 @@ public class KullanıcıGiriş extends JFrame {
                 }
             }
         });
-
-        // Parola textfield
-        txtParola = new JTextField();
-        txtParola.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (txtParola.getText().equals("Parola")) {
-                    txtParola.setText("");
-                    txtParola.setForeground(Color.LIGHT_GRAY);
-                }
-            }
-        });
-
-        txtParola.setText("Parola");
-        txtParola.setForeground(Color.LIGHT_GRAY);
-        txtParola.setFont(new Font("Yu Gothic Medium", Font.BOLD, 18));
-        txtParola.setColumns(10);
-        txtParola.setBounds(482, 158, 297, 36);
-        contentPane.add(txtParola);
 
         // kullaniciadi textfield
         txtkullaniciadi = new JTextField();
@@ -184,8 +163,19 @@ public class KullanıcıGiriş extends JFrame {
         btnSifremiUnuttum.setForeground(Color.BLACK);
         btnSifremiUnuttum.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
         btnSifremiUnuttum.setBackground(Color.ORANGE);
-        btnSifremiUnuttum.setBounds(548, 272, 167, 36);
+        btnSifremiUnuttum.setBounds(549, 284, 167, 36);
         contentPane.add(btnSifremiUnuttum);
+        
+        JLabel labelparola = new JLabel("Parola : ");
+        labelparola.setForeground(new Color(163, 139, 61));
+        labelparola.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
+        labelparola.setBounds(482, 158, 65, 14);
+        contentPane.add(labelparola);
+        
+        parolafield = new JPasswordField();
+        parolafield.setBounds(482, 179, 297, 36);
+        contentPane.add(parolafield);
+
 
         btnSifremiUnuttum.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {

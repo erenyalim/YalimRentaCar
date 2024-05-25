@@ -32,6 +32,7 @@ import java.awt.Cursor;
 import java.text.DateFormat;
 import java.time.ZoneId;
 import java.util.Date;
+import javax.swing.JPasswordField;
 
 public class ÜyeOl extends JFrame {
 
@@ -41,7 +42,6 @@ public class ÜyeOl extends JFrame {
 	private JTextField txtSoyad;
 	private JTextField txtAd;
 	private JTextField txtTcKimlikNo;
-	private JTextField textparola;
 	private JTextField txtKullaniciadi;
 
 	private JLabel kullanicikayitLabel;
@@ -50,6 +50,8 @@ public class ÜyeOl extends JFrame {
 	private JCheckBox chckbox2;
 	private JButton btnGeriDn;
 	private JLabel line;
+	private JLabel labelparola;
+	private JPasswordField parolafield;
 
 	public ÜyeOl() {
 
@@ -135,7 +137,7 @@ public class ÜyeOl extends JFrame {
 							tempId++;
 							Date date = doğumtarihi.getDate();
 							String strDate = DateFormat.getDateInstance().format(date);
-							String temp = tempId + "," + txtTcKimlikNo.getText().trim() + "," + txtAd.getText().trim() + "," + txtSoyad.getText().trim() + "," + strDate + "," + txtKullaniciadi.getText().trim() + "," + textparola.getText().trim() + "\r\n";
+							String temp = tempId + "," + txtTcKimlikNo.getText().trim() + "," + txtAd.getText().trim() + "," + txtSoyad.getText().trim() + "," + strDate + "," + txtKullaniciadi.getText().trim() + "," + new String(parolafield.getPassword()) + "\r\n";
 							fWriter = new FileWriter("müşteri.txt", true);
 							fWriter.write(temp);
 							JOptionPane.showMessageDialog(ÜyeOl.this, "Kayıt olma başarılı.");
@@ -165,7 +167,7 @@ public class ÜyeOl extends JFrame {
 		btnUyeol.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
 		btnUyeol.setBackground(Color.ORANGE);
 		btnUyeol.setForeground(Color.BLACK);
-		btnUyeol.setBounds(483, 469, 117, 36);
+		btnUyeol.setBounds(483, 480, 117, 36);
 		contentPane.add(btnUyeol);
 
 		// Doğum Tarihi
@@ -174,8 +176,6 @@ public class ÜyeOl extends JFrame {
 		doğumtarihi.setBounds(483, 246, 297, 36);
 		doğumtarihi.setDateFormatString("dd MMM yyyy");
 		contentPane.add(doğumtarihi);
-
-
 
 		// Soyad
 		txtSoyad = new JTextField();
@@ -188,6 +188,7 @@ public class ÜyeOl extends JFrame {
 				}
 			}
 		});
+
 		txtSoyad.setText("Soyad");
 		txtSoyad.setForeground(Color.LIGHT_GRAY);
 		txtSoyad.setFont(new Font("Yu Gothic Medium", Font.BOLD, 18));
@@ -206,6 +207,7 @@ public class ÜyeOl extends JFrame {
 				}
 			}
 		});
+
 		txtAd.setText("Ad");
 		txtAd.setForeground(Color.LIGHT_GRAY);
 		txtAd.setFont(new Font("Yu Gothic Medium", Font.BOLD, 18));
@@ -225,6 +227,7 @@ public class ÜyeOl extends JFrame {
 				}
 			}
 		});
+
 		txtTcKimlikNo.setText("T.C Kimlik Numarası");
 		txtTcKimlikNo.setForeground(Color.LIGHT_GRAY);
 		txtTcKimlikNo.setFont(new Font("Yu Gothic Medium", Font.BOLD, 18));
@@ -245,24 +248,6 @@ public class ÜyeOl extends JFrame {
 				}
 		);
 
-		// Parola
-		textparola = new JTextField();
-		textparola.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (textparola.getText().equals("Parola")) {
-					textparola.setText("");
-					textparola.setForeground(Color.LIGHT_GRAY);
-				}
-			}
-		});
-		textparola.setText("Parola");
-		textparola.setForeground(Color.LIGHT_GRAY);
-		textparola.setFont(new Font("Yu Gothic Medium", Font.BOLD, 18));
-		textparola.setColumns(10);
-		textparola.setBounds(483, 340, 297, 36);
-		contentPane.add(textparola);
-
 		// Kullanıcı adı
 		txtKullaniciadi = new JTextField();
 		txtKullaniciadi.addMouseListener(new MouseAdapter() {
@@ -274,6 +259,7 @@ public class ÜyeOl extends JFrame {
 				}
 			}
 		});
+		
 		txtKullaniciadi.setText("Kullanıcı Adı");
 		txtKullaniciadi.setForeground(Color.LIGHT_GRAY);
 		txtKullaniciadi.setFont(new Font("Yu Gothic Medium", Font.BOLD, 18));
@@ -286,7 +272,7 @@ public class ÜyeOl extends JFrame {
 		btnGeriDn.setForeground(Color.BLACK);
 		btnGeriDn.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
 		btnGeriDn.setBackground(Color.ORANGE);
-		btnGeriDn.setBounds(662, 469, 117, 36);
+		btnGeriDn.setBounds(663, 480, 117, 36);
 		contentPane.add(btnGeriDn);
 		// Giriş ekranına dönme
 		btnGeriDn.addActionListener(new ActionListener() {
@@ -305,14 +291,24 @@ public class ÜyeOl extends JFrame {
 		chckbox1 = new JCheckBox("Kiralama Koşulları kabul ediyorum.");
 		chckbox1.setForeground(Color.BLACK);
 		chckbox1.setBackground(Color.ORANGE);
-		chckbox1.setBounds(483, 417, 297, 23);
+		chckbox1.setBounds(483, 439, 297, 23);
 		contentPane.add(chckbox1);
 
 		chckbox2 = new JCheckBox("KVKK Aydınlatma Metni'ni okudum ve anladım.");
 		chckbox2.setBackground(Color.ORANGE);
 		chckbox2.setForeground(Color.BLACK);
-		chckbox2.setBounds(483, 391, 297, 23);
+		chckbox2.setBounds(483, 413, 297, 23);
 		contentPane.add(chckbox2);
+		
+		labelparola = new JLabel("Parola : ");
+		labelparola.setForeground(new Color(163, 139, 61));
+		labelparola.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
+		labelparola.setBounds(483, 340, 65, 14);
+		contentPane.add(labelparola);
+		
+		parolafield = new JPasswordField();
+		parolafield.setBounds(483, 358, 297, 36);
+		contentPane.add(parolafield);
 
 		setVisible(true);
 	}
