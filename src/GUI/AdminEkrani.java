@@ -20,7 +20,6 @@ import java.util.List;
 
 public class AdminEkrani extends JFrame {
 
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtMarka;
 	private JTextField txtModel;

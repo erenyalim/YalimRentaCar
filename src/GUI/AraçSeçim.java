@@ -27,7 +27,6 @@ import javax.swing.ScrollPaneConstants;
 
 public class AraçSeçim extends JFrame {
 
-    private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JButton btnGeri;
     private long gunSayisi;
