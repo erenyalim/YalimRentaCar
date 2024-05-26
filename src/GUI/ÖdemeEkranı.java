@@ -172,7 +172,8 @@ public class ÖdemeEkranı extends JFrame {
                         if ((strArray.length >= 3)
                                 && strArray[0].equals(kartNo.getText().trim())
                                 && strArray[1].equals(ay.getSelectedItem())
-                                && strArray[2].equals(yil.getSelectedItem())) {
+                                && strArray[2].equals(yil.getSelectedItem())
+                                &&strArray[3].equals(cvv.getText().trim())) {
                             found = true;
                             JOptionPane.showMessageDialog(ÖdemeEkranı.this, "Ödemeniz başarıyla alınmıştır. Yalım Rent a Car'ı tercih ettiğiniz için teşekkür ederiz. Aracınızı tercih ettiğiniz bayimizden teslim alabilirsiniz.");
                             KiralamaEkranı kiralamaEkranı = new KiralamaEkranı(hoşgeldinkullanici);

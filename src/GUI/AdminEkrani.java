@@ -1,19 +1,15 @@
 package GUI;
 
-import entities.concretes.Araç;
 import entities.concretes.Sürücü;
-
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Toolkit;
-
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -43,6 +39,10 @@ public class AdminEkrani extends JFrame {
 	private JPasswordField passwordField;
 	private JTable table;
 	private DefaultTableModel kiralananaraçTabloModel;
+	private JLabel labelparola;
+	private JLabel lblKasaTipi;
+	private JLabel lblYaktTr;
+	private JScrollPane scrollPane;
 
 	public AdminEkrani() {
 
@@ -92,6 +92,16 @@ public class AdminEkrani extends JFrame {
 		txtMarka.setBounds(80, 90, 190, 21);
 		contentPane.add(txtMarka);
 
+		txtMarka.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (txtMarka.getText().equals("Marka")) {
+					txtMarka.setText("");
+					txtMarka.setForeground(Color.LIGHT_GRAY);
+				}
+			}
+		});
+
 		//Model
 		txtModel = new JTextField();
 		txtModel.setText("Model");
@@ -101,13 +111,23 @@ public class AdminEkrani extends JFrame {
 		txtModel.setBounds(80, 122, 190, 21);
 		contentPane.add(txtModel);
 
-		JLabel lblKasaTipi = new JLabel("Kasa Tipi :");
+		txtModel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (txtModel.getText().equals("Model")) {
+					txtModel.setText("");
+					txtModel.setForeground(Color.LIGHT_GRAY);
+				}
+			}
+		});
+
+		lblKasaTipi = new JLabel("Kasa Tipi :");
 		lblKasaTipi.setForeground(new Color(163, 139, 61));
 		lblKasaTipi.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
 		lblKasaTipi.setBounds(80, 154, 62, 14);
 		contentPane.add(lblKasaTipi);
 
-		JLabel lblYaktTr = new JLabel("Yakıt Türü: ");
+		lblYaktTr = new JLabel("Yakıt Türü: ");
 		lblYaktTr.setForeground(new Color(163, 139, 61));
 		lblYaktTr.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
 		lblYaktTr.setBounds(80, 208, 65, 14);
@@ -149,6 +169,16 @@ public class AdminEkrani extends JFrame {
 		txtGnlkcret.setBounds(80, 333, 190, 21);
 		contentPane.add(txtGnlkcret);
 
+		txtGnlkcret.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (txtGnlkcret.getText().equals("Günlük Ücret")) {
+					txtGnlkcret.setText("");
+					txtGnlkcret.setForeground(Color.LIGHT_GRAY);
+				}
+			}
+		});
+
 		//Plaka
 		txtPlaka = new JTextField();
 		txtPlaka.setText("Plaka");
@@ -157,6 +187,16 @@ public class AdminEkrani extends JFrame {
 		txtPlaka.setColumns(10);
 		txtPlaka.setBounds(80, 365, 190, 21);
 		contentPane.add(txtPlaka);
+
+		txtPlaka.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (txtPlaka.getText().equals("Plaka")) {
+					txtPlaka.setText("");
+					txtPlaka.setForeground(Color.LIGHT_GRAY);
+				}
+			}
+		});
 
 		//Araç Ekle Buton
 		btnAracEkle = new JButton("Aracı Ekle");
@@ -257,7 +297,18 @@ public class AdminEkrani extends JFrame {
 		txtKullancAd.setBounds(80, 524, 190, 21);
 		contentPane.add(txtKullancAd);
 
-		JLabel labelparola = new JLabel("Parola : ");
+		txtKullancAd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (txtKullancAd.getText().equals("Kullanıcı Adı")) {
+					txtKullancAd.setText("");
+					txtKullancAd.setForeground(Color.LIGHT_GRAY);
+				}
+			}
+		});
+
+
+		labelparola = new JLabel("Parola : ");
 		labelparola.setForeground(new Color(163, 139, 61));
 		labelparola.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
 		labelparola.setBounds(80, 556, 65, 14);
@@ -316,7 +367,7 @@ public class AdminEkrani extends JFrame {
 					try {
 						tempId++;
 						String temp = tempId + "," + txtKullancAd.getText().trim() + "," + new String(passwordField.getPassword()) + "," + "\r\n";
-						java.util.Arrays.fill(passwordField.getPassword(), '0');//password field temizleme
+						java.util.Arrays.fill(passwordField.getPassword(), '0'); 
 						fWriter = new FileWriter("admin.txt", true);
 						fWriter.write(temp);
 						JOptionPane.showMessageDialog(AdminEkrani.this, "Yeni admin eklendi.");
@@ -354,12 +405,6 @@ public class AdminEkrani extends JFrame {
 		String[] kiralananaraçlar = {"İD", "T.C Kimlik No", "Ehliyet No", "Ad", "Soyad", "Plaka", "Alış Tarihi", "Dönüş Tarihi"};
 		kiralananaraçTabloModel = new DefaultTableModel(kiralananaraçlar, 0);
 
-		JTable table = new JTable(kiralananaraçTabloModel) {
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return column == 8;
-			}
-		};
 
 		table = new JTable(kiralananaraçTabloModel);
 		table.setBounds(319, 90, 935, 580);
@@ -367,7 +412,7 @@ public class AdminEkrani extends JFrame {
 		table.getTableHeader().setReorderingAllowed(false);
 		contentPane.add(table);
 
-		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane = new JScrollPane(table);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(307, 81, 947, 574);
 		contentPane.add(scrollPane);

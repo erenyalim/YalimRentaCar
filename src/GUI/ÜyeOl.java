@@ -138,6 +138,7 @@ public class ÜyeOl extends JFrame {
 							Date date = doğumtarihi.getDate();
 							String strDate = DateFormat.getDateInstance().format(date);
 							String temp = tempId + "," + txtTcKimlikNo.getText().trim() + "," + txtAd.getText().trim() + "," + txtSoyad.getText().trim() + "," + strDate + "," + txtKullaniciadi.getText().trim() + "," + new String(parolafield.getPassword()) + "\r\n";
+							java.util.Arrays.fill(parolafield.getPassword(), '0'); 
 							fWriter = new FileWriter("müşteri.txt", true);
 							fWriter.write(temp);
 							JOptionPane.showMessageDialog(ÜyeOl.this, "Kayıt olma başarılı.");

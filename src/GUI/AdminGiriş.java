@@ -18,17 +18,19 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 
 public class AdminGiriş extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtKullancAd;
-	private JTextField txtsifre;
 	private JLabel admingirisLabel;
 	private JButton btnGirisyap;
 	private JButton btnGeriDn;
 	private JLabel line;
+	private JPasswordField parolafield;
+	private JLabel labelparola;
 
 	public AdminGiriş() {
 				//Frame
@@ -58,6 +60,33 @@ public class AdminGiriş extends JFrame {
 				line.setBounds(0, 86, 1264, 6);
 				contentPane.add(line);
 
+				txtKullancAd = new JTextField();
+				txtKullancAd.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						if (txtKullancAd.getText().equals("Kullanıcı adı")) {
+							txtKullancAd.setText("");
+							txtKullancAd.setForeground(Color.LIGHT_GRAY);
+						}
+					}
+				});
+				txtKullancAd.setText("Kullanıcı adı");
+				txtKullancAd.setForeground(Color.LIGHT_GRAY);
+				txtKullancAd.setFont(new Font("Yu Gothic Medium", Font.BOLD, 18));
+				txtKullancAd.setColumns(10);
+				txtKullancAd.setBounds(483, 112, 297, 36);
+				contentPane.add(txtKullancAd);
+				
+				labelparola = new JLabel("Parola : ");
+				labelparola.setForeground(new Color(163, 139, 61));
+				labelparola.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
+				labelparola.setBounds(483, 159, 65, 14);
+				contentPane.add(labelparola);
+				
+				parolafield = new JPasswordField();
+				parolafield.setBounds(483, 177, 297, 36);
+				contentPane.add(parolafield);
+				
 				
 				btnGirisyap = new JButton("Giriş Yap");
 				btnGirisyap.addActionListener(new ActionListener() {
@@ -74,7 +103,7 @@ public class AdminGiriş extends JFrame {
 				            while ((line = br.readLine()) != null) {
 				                strArray = line.split(",");
 				                if ((strArray[1].equals(txtKullancAd.getText().trim()))
-				                        && (strArray[2].equals(txtsifre.getText().trim()))) {
+				                        && new String(parolafield.getPassword()).equals(strArray[2])) {
 				                    found = true;
 				                    break;
 				                } 
@@ -106,7 +135,7 @@ public class AdminGiriş extends JFrame {
 				btnGirisyap.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
 				btnGirisyap.setBackground(Color.ORANGE);
 				btnGirisyap.setForeground(Color.BLACK);
-				btnGirisyap.setBounds(483, 219, 117, 36);
+				btnGirisyap.setBounds(483, 235, 117, 36);
 				contentPane.add(btnGirisyap);
 				
 				btnGirisyap.addMouseListener(new MouseAdapter() {
@@ -124,7 +153,7 @@ public class AdminGiriş extends JFrame {
 				btnGeriDn.setForeground(Color.BLACK);
 				btnGeriDn.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
 				btnGeriDn.setBackground(Color.ORANGE);
-				btnGeriDn.setBounds(663, 219, 117, 36);
+				btnGeriDn.setBounds(663, 235, 117, 36);
 				contentPane.add(btnGeriDn);
 				
 				btnGeriDn.addMouseListener(new MouseAdapter() {
@@ -152,42 +181,6 @@ public class AdminGiriş extends JFrame {
 		            }});
 
 				
-				txtKullancAd = new JTextField();
-				
-				txtKullancAd.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						if (txtKullancAd.getText().equals("Kullanıcı adı")) {
-							txtKullancAd.setText("");
-							txtKullancAd.setForeground(Color.LIGHT_GRAY);
-						}
-					}
-				});
-				
-				txtKullancAd.setText("Kullanıcı adı");
-				txtKullancAd.setForeground(Color.LIGHT_GRAY);
-				txtKullancAd.setFont(new Font("Yu Gothic Medium", Font.BOLD, 18));
-				txtKullancAd.setColumns(10);
-				txtKullancAd.setBounds(483, 112, 297, 36);
-				contentPane.add(txtKullancAd);
-				
-				txtsifre = new JTextField();
-				txtsifre.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						if (txtsifre.getText().equals("Parola")) {
-							txtsifre.setText("");
-							txtsifre.setForeground(Color.LIGHT_GRAY);
-						}
-					}
-				});
-				
-				txtsifre.setText("Parola");
-				txtsifre.setForeground(Color.LIGHT_GRAY);
-				txtsifre.setFont(new Font("Yu Gothic Medium", Font.BOLD, 18));
-				txtsifre.setColumns(10);
-				txtsifre.setBounds(483, 159, 297, 36);
-				contentPane.add(txtsifre);
 				
 				setVisible(true);
 	}

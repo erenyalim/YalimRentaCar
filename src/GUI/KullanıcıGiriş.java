@@ -71,6 +71,7 @@ public class KullanıcıGiriş extends JFrame {
                         strArray = line.split(",");
                         if ((strArray.length > 6) && (strArray[5].equals(txtkullaniciadi.getText().trim()))
                                 && new String(parolafield.getPassword()).equals(strArray[6])) {
+                        	java.util.Arrays.fill(parolafield.getPassword(), '0');
                             found = true;
                             hoşgeldinkullanici = strArray[2];
                             break;
