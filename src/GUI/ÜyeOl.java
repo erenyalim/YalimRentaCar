@@ -1,36 +1,24 @@
 package GUI;
 
 import com.toedter.calendar.JDateChooser;
-
 import java.awt.Color;
-
 import java.awt.Toolkit;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.Component;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
-
 import java.awt.event.*;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import java.awt.Cursor;
 import java.text.DateFormat;
-import java.time.ZoneId;
 import java.util.Date;
 import javax.swing.JPasswordField;
 

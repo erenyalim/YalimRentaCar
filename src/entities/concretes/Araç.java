@@ -1,6 +1,5 @@
 package entities.concretes;
 
-import java.util.Locale.Category;
 
 public class Araç {
 	private int id;
